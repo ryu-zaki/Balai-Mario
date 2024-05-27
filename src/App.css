@@ -1,38 +1,108 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+    min-height: 100vh;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.title-font {
+    font-family: "DM Serif Display", serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.side-nav {
+    width: clamp(15em, 80%, 20em);
 }
 
-.App-link {
-  color: #61dafb;
+.side-nav .nav-list {
+    margin-top: 1.5em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.side-nav .nav-list > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.7em;
+}
+
+.side-nav .nav-list > ul > * {
+    display: flex;
+    align-items: center;
+    gap: .6em;
+    font-size: .9em;
+    font-weight: 600;
+}
+
+.side-nav .nav-list > ul > *.active {
+    background-color: #eee;
+    padding: .8em 1em;
+    border-radius: 6em;
+}
+
+.side-nav .nav-list > ul img {
+    width: 1.7em;
+}
+
+
+/* Hero Section */
+.hero-img {
+    width: 80%;
+    max-width: 17em;
+    aspect-ratio: 1;
+}
+
+.aspect-1 {
+    aspect-ratio: 1;
+}
+
+.hero-title {
+    font-size: clamp(2em, 10vw, 3.6em);
+}
+ 
+.hero-section {
+    max-width: 40em;
+}
+
+@media (min-width: 930px) {
+
+    .hero-title {
+        line-height: 1.2;
+    }
+
+    .hero-img {
+        max-width: 25em;
+    }
+
+    .hero-section {
+        max-width: 28em;
+    }
+}
+
+@media (min-width: 1280px) {
+    .hero-img {
+        width: 65vw;
+        max-width: 80em;
+    }
+
+    body {
+        width: 100%;
+        position:relative;
+        overflow-x: hidden;
+        min-width: 100%;
+        
+    }
+
+    .hero-section {
+        max-width: 50%;
+        min-height: 80vh;
+        gap: 5vh;
+    }
+
+    .hero-title {
+        line-height: 1.05;
+        font-size: clamp(3em, 10vw, 4.5em);
+    }
 }
