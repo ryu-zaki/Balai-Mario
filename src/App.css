@@ -1,18 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
 
+:root {
+    /* Colors */
+    --lightOrange: #c46e24;
+    --darkBrown: #2e2517;
+    --brown: #90591a;
+    --pureWhitw: #fff;
+    --dark: #0c0403;
+}
+
 * {
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
 }
 
 body {
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .title-font {
     font-family: "DM Serif Display", serif;
 }
+
+/* Navigation */
 
 .side-nav {
     width: clamp(15em, 80%, 20em);
@@ -46,6 +59,75 @@ body {
     width: 1.7em;
 }
 
+.nav-active-effect {
+    position: absolute;
+    left: -5%;
+    width: 0;
+    bottom: 0;
+    height: 2px;
+    z-index: -1;
+    background-color: var(--lightOrange);
+    border-radius: .5em;
+    transition: all .8s;
+}
+
+.nav-horizontal > li {
+    cursor: pointer;
+    padding-inline: 1.5em;
+}
+
+.nav-horizontal > :is(
+    li:nth-of-type(1):hover, 
+    li:nth-of-type(2):hover,
+    li:nth-of-type(3):hover,
+    li:nth-of-type(4):hover,
+    li:nth-of-type(5):hover) 
+  {
+    transition: all .4s;
+  }   
+
+
+.nav-horizontal li:nth-child(1).active  ~ .nav-active-effect {
+    left: 3%;
+    width: 15%;
+}
+
+.nav-horizontal li:nth-child(2).active  ~ .nav-active-effect {
+    left: 26%;
+    width: 18%;
+}
+
+.nav-horizontal li:nth-child(3).active  ~ .nav-active-effect {
+    left: 53%;
+    width: 16%;
+}
+
+.nav-horizontal li:nth-child(4).active  ~ .nav-active-effect {
+    left: 78%;
+    width: 18%;
+}
+
+
+.nav-horizontal > :is(li:nth-of-type(1):hover ~ .nav-active-effect) {
+    left: 3%;
+    width: 15%;
+}
+
+.nav-horizontal > :is(li:nth-of-type(2):hover) ~ .nav-active-effect {
+    left: 26%;
+    width: 18%;
+}
+
+.nav-horizontal > :is(li:nth-of-type(3):hover) ~ .nav-active-effect {
+    left: 53%;
+    width: 16%;
+}
+
+.nav-horizontal > li:nth-of-type(4):hover ~ .nav-active-effect {
+    left: 78%;
+    width: 18%;
+}
+
 
 /* Hero Section */
 .hero-img {
@@ -66,43 +148,186 @@ body {
     max-width: 40em;
 }
 
-@media (min-width: 930px) {
+.message-modal {
+    font-size: .7em;
+}
+
+.message-modal span {
+    font-size: .8em;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+   border-left: 10px solid transparent;
+   border-top: 15px solid #fff;
+   border-right: 10px solid transparent;
+
+}
+
+.offers-min-height {
+    min-height: 15em;
+}
+
+.about-grid-container {
+    display: grid;
+    grid-template-areas: 
+      'events foods'
+      'desc desc'
+      'serving serving'
+    ;
+    gap: .6em;
+    row-gap: 3em;
+    max-width: 45em;
+    margin-inline: auto;
+}
+
+.about-grid-container > *:nth-child(1) {
+    grid-area: events; 
+}
+
+.about-grid-container > *:nth-child(2) {
+    grid-area: foods; 
+}
+
+.about-grid-container > *:nth-child(3) {
+    grid-area: desc;
+}
+
+.about-grid-container > *:nth-child(4) {
+    grid-area: serving;
+}
+
+.responsive-title {
+    font-size: clamp(2em, 4vw, 4em);
+}
+
+.about-grid-container .about-card:hover img {
+    transform: translate(0,0);
+}
+
+.button-scale-effect {
+    position: relative;
+    overflow: hidden;
+    transition: all .4s;
+    z-index: 3;
+}
+
+.button-scale-effect::before {
+    content: '';
+    position: absolute;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: all .6s;
+
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    scale: 0;
+    z-index: -1;
+}
+
+.button-scale-effect:hover::before {
+    scale: 5.5;
+}
+
+.button-scale-effect:hover {
+    color: #222;
+}
+
+@media (min-width: 970px) {
+
+     
 
     .hero-title {
         line-height: 1.2;
+        font-size: 3em;
     }
 
     .hero-img {
-        max-width: 25em;
+        width: 40%;
+        max-width: 33em;
     }
 
     .hero-section {
-        max-width: 28em;
+        width: 95%;
+        max-width: 70em;
+    }
+
+
+    .hero-section .hero-description {
+        width: 50%;
+    }
+
+
+    /* About us */
+
+    .about-grid-container {
+        max-width: 60em;
+        grid-auto-columns: 1fr;
+        grid-template-areas: 
+          'serving desc'
+          'events foods'
+         ;
+
+        row-gap: 5em;
     }
 }
 
-@media (min-width: 1280px) {
-    .hero-img {
-        width: 65vw;
-        max-width: 80em;
-    }
+@media (min-width: 1180px) {
 
-    body {
-        width: 100%;
-        position:relative;
-        overflow-x: hidden;
-        min-width: 100%;
-        
-    }
-
-    .hero-section {
-        max-width: 50%;
-        min-height: 80vh;
-        gap: 5vh;
+    .message-modal span {
+        font-size: 1em;
     }
 
     .hero-title {
-        line-height: 1.05;
-        font-size: clamp(3em, 10vw, 4.5em);
+        font-size: 4.8em;
     }
+
+    .hero-section {
+        width: 100%;
+        max-width: 90em;
+        min-height: 80vh;
+    }
+
+    .hero-section .hero-description {
+        width: 58%;
+        max-width: 40em;
+    }
+
+    /* About us */
+
+    .about-grid-container {
+        max-width: 70em;
+        width: 95%;
+        grid-auto-columns: 1fr;
+        grid-template-areas: 
+          'serving desc desc'
+          'serving events foods'
+         ;
+        column-gap: 2em;
+        row-gap: 4em;
+    }
+
+    .about-grid-container > *:nth-child(3) {
+        padding-right: 35%;
+    }
+
+    .about-grid-container > *:last-child img {
+        object-position: 67% 0;
+    }
+}
+
+@media (min-width: 1580px) {
+
+    .hero-title {
+        font-size: 5.4em;
+    }
+
+    .hero-section .hero-description {
+        max-width: 45em;
+    }
+
 }

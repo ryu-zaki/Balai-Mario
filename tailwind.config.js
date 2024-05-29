@@ -12,13 +12,13 @@ module.exports = {
       'md': '768px',
       // => @media (min-width: 768px) { ... }
 
-      'lg': '930px',
+      'lg': '970px',
       // => @media (min-width: 1024px) { ... }
 
-      'xl': '1280px',
+      'xl': '1180px',
       // => @media (min-width: 1280px) { ... }
 
-      '2xl': '1536px',
+      '2xl': '1580px',
       // => @media (min-width: 1536px) { ... }
     },
 
@@ -29,11 +29,11 @@ module.exports = {
       "brown": "#90591a",
       "gray": "#555",
       "lightOrange": "#c46e24",
-      "darkOverlay": "rgba",
       "pureWhite": "#fff",
 
       /* Overlay */
       "darkOverlay": "rgba(46,37,23, .7)",
+      "lightOverlay": "rgba(46,37,23, .5)",
       "imgOverlay": "rgba(46,37,23, .4)"
      }
   },
