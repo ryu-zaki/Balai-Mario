@@ -9,7 +9,7 @@ const AboutUs = () => {
 
 
     return (
-        <div className='mb-32'>
+        <div>
          <div className='text-center'>
            <span className='text-sm mb-3'>OUR STORY</span>
            <h2 className='title-font responsive-title text-darkBrown'>About Us</h2>

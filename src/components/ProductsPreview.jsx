@@ -7,7 +7,7 @@ import chickenCover from '../assets/products/fried-chicken.jpg';
 const ProductsPreview = () => {
 
     return (
-        <div className='preview-section flex flex-col gap-8 mb-52 lg:gap-14 xl:gap-20'>
+        <div className='preview-section flex flex-col gap-8 lg:gap-14 xl:gap-20'>
           <div className='flex flex-col items-center'>
             <span className='text-sm'>TASTE THE VALUE</span>
             <h2 className='title-font text-darkBrown responsive-title lg:mt-5'>Our Products</h2>

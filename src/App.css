@@ -14,6 +14,17 @@
 
     /* Min Heights */
     --previewContainerHeight: 40em;
+    --featureOverlayMinHeight: 100%;
+
+    /* Widths */
+    --featurePicWidth: 12em;
+    --featureOverlayWidth: 110%;
+
+
+
+    /* Heights */
+    --featureOverlayHeight: 100%;
+    --serviceLineHeight: .15em;
 }
 
 * {
@@ -307,7 +318,38 @@ body {
     width: 100%;
 }
 
+/* Services Section */
+.feature-overlay {
+    width: var(--featureOverlayWidth);
+    height: var(--featureOverlayHeight);
+    min-height: 20em;
+    border-top-left-radius: 6em;
+    border-bottom-left-radius: 6em;
+}
+
+.feature-overlay > div {
+    width: var(--featurePicWidth);
+    padding: .5em;
+    right: 7%;
+}
+
+.service-title::before {
+    content: '';
+    position: absolute;
+    bottom: -.3em;
+    width: 100%;
+    height: var(--serviceLineHeight);
+    background-color: var(--lightOrange);
+
+}
+
 @media (min-width: 620px) {
+    
+    :root {
+        --featurePicWidth: 17em;
+        --featureOverlayWidth: 105%;
+    }
+
     .preview-container > *:hover {
         flex: 2;
     }
@@ -315,14 +357,25 @@ body {
     .preview-container > *:hover .info-box {
         transform: translateY(-40%);
     }
+
+    /* Services Section */
+    .feature-overlay > div {
+        padding: .8em;
+    }
 }
 
 @media (min-width: 970px) {
 
      :root {
         --previewContainerWidth: 70em;
-        --previewContainerHeight: 28em;
-     }
+        --previewContainerHeight: 28em; 
+
+
+        /* Services */
+        --featurePicWidth: 12em;
+        --serviceLineHeight: .09em;
+       
+    }
 
     .hero-title {
         line-height: 1.2;
@@ -365,6 +418,11 @@ body {
 }
 
 @media (min-width: 1180px) {
+
+    :root {
+        --featurePicWidth: 20em;
+        --featureOverlayWidth: 110%;
+    }
 
     .message-modal span {
         font-size: 1em;
@@ -420,6 +478,10 @@ body {
         transform: translateY(-40%);
     }
     
+    /* Services Section */
+    .feature-overlay > div {
+        padding: 1em;
+    }
 
 }
 
