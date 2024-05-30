@@ -7,6 +7,13 @@
     --brown: #90591a;
     --pureWhitw: #fff;
     --dark: #0c0403;
+
+
+    /* Max Widths */
+    --previewContainerWidth: 35em;
+
+    /* Min Heights */
+    --previewContainerHeight: 40em;
 }
 
 * {
@@ -237,9 +244,85 @@ body {
     color: #222;
 }
 
+/* Product Preview */
+
+.preview-container {
+    min-height: var(--previewContainerHeight);
+    justify-content: space-between;
+    max-width: var(--previewContainerWidth);
+    width: 100%;
+}
+
+.preview-container > * {
+    flex: 1;
+    transition: all .7s;
+}
+
+.preview-container > * > * {
+    transition: all .8s;
+}
+
+.preview-container > *:hover {
+    flex: 3;
+}
+
+.preview-container > *:hover .preview-overlay {
+    background-color: rgba(0,0,0,0.7);
+}
+
+.preview-container > *:hover .desc {
+    bottom: 50%;
+    right: 50%;
+
+    translate: 50% 0;
+}
+
+.preview-container > *:hover .desc > * {
+    padding: 0;
+    color: var(--pureWhitw);
+    background-color: transparent;
+}
+
+.preview-container > *:hover .desc > p {
+    right: 50%;
+    translate: 50% 0;
+}
+
+.preview-container > *:hover .desc > h3 {
+    font-size: 2em;
+    margin-top: .6em;
+}
+
+.preview-container > * .info-box {
+    max-width: 26em;
+}
+
+.preview-container > *:hover .info-box {
+    bottom: 0;
+    transform: translateY(-55%);
+}
+
+.preview-section {
+    max-width: 80em;
+    width: 100%;
+}
+
+@media (min-width: 620px) {
+    .preview-container > *:hover {
+        flex: 2;
+    }
+
+    .preview-container > *:hover .info-box {
+        transform: translateY(-40%);
+    }
+}
+
 @media (min-width: 970px) {
 
-     
+     :root {
+        --previewContainerWidth: 70em;
+        --previewContainerHeight: 28em;
+     }
 
     .hero-title {
         line-height: 1.2;
@@ -273,6 +356,11 @@ body {
          ;
 
         row-gap: 5em;
+    }
+
+    /* Products Preview */
+    .preview-container > *:hover .info-box {
+        transform: translateY(-55%);
     }
 }
 
@@ -318,6 +406,21 @@ body {
     .about-grid-container > *:last-child img {
         object-position: 67% 0;
     }
+
+    /* Product Preview */
+    .preview-section > div > h2 {
+        line-height: 1;
+    }
+
+    .preview-container > *:hover .desc > h3 {
+        font-size: 2.5em
+    }
+
+    .preview-container > *:hover .info-box {
+        transform: translateY(-40%);
+    }
+    
+
 }
 
 @media (min-width: 1580px) {

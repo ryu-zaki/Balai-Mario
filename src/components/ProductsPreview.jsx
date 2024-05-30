@@ -7,46 +7,71 @@ import chickenCover from '../assets/products/fried-chicken.jpg';
 const ProductsPreview = () => {
 
     return (
-        <div>
-          <div>
-            <h2>Our <span>Products</span></h2>
+        <div className='preview-section flex flex-col gap-8 mb-52 lg:gap-14 xl:gap-20'>
+          <div className='flex flex-col items-center'>
+            <span className='text-sm'>TASTE THE VALUE</span>
+            <h2 className='title-font text-darkBrown responsive-title lg:mt-5'>Our Products</h2>
           </div>
           
-          <div className='flex flex-col gap-2'>
-            <section>
-                <img src={starterCover} alt='' />
-                <h2>01</h2>
-                
-                <div>
-                    <span></span>
-                    <h3>Starter</h3>
-                </div>
-            </section>
+          <div className='flex flex-col relative gap-4 preview-container mx-auto lg:flex-row xl:gap-8'>
+            <div className='absolute w-52 h-52 bg-lightOrange -top-4 -z-10 rounded-2xl -left-4'></div>
+            <ProductPreview 
+              proNum={"01"} 
+              ImgSrc={starterCover} 
+              title={"STARTER"} 
+              price={220} 
+            />
 
-            <section>
-                <img src={starterCover} alt='' />
-                <h2>01</h2>
-                
-                <div>
-                    <span></span>
-                    <h3>Starter</h3>
-                </div>
-            </section>
+           <ProductPreview 
+              proNum={"02"} 
+              ImgSrc={vegetarianCover} 
+              title={"VEGETARIAN"} 
+              price={220} 
+            />
 
-            <section>
-                <img src={starterCover} alt='' />
-                <h2>01</h2>
-                
-                <div>
-                    <span></span>
-                    <h3>Starter</h3>
-                </div>
-            </section>
+           <ProductPreview 
+              proNum={"03"} 
+              ImgSrc={chickenCover} 
+              title={"CHICKEN"} 
+              price={220} 
+            />
+
+            
 
 
           </div>
 
         </div>
+    )
+}
+
+const ProductPreview = ({proNum, ImgSrc, title, price}) => {
+
+    return (
+        <section className='relative text-pureWhite product-preview overflow-hidden rounded-xl flex justify-center'>
+
+            {/* Overlay */}
+            <div className='preview-overlay absolute inset-0 w-full h-full bg-darkOverlay'></div>
+
+            {/* Info and Image */}
+            <img className='absolute object-cover -z-10 inset-0 w-full h-full' src={ImgSrc} alt='' />
+
+            
+            <h2 className='absolute m-0 text-5xl top-4 title-font left-4 z-10 lg:text-6xl xl:top-6 xl:left-6'>{proNum}</h2>
+                
+            <div className='absolute desc bottom-0 right-0 z-10 flex flex-col  text-right items-end'>
+                <p className='rounded-tl-xl relative right-0 bg-pureWhite text-xs p-2 pl-4 transition-all duration-700  font-semibold text-darkBrown lg:text-sm xl:pl-6 xl:p-3'>Starts at ₱
+{price}.00</p>
+                <h3 className='rounded-tl-xl bg-lightOrange m-0 transition-all duration-700  p-2 px-5 pl-20 text-sm lg:text-base xl:pl-20 xl:text-lg xl:py-3'>{title}</h3>
+            </div>
+
+
+            {/* Information */}
+            <div className='info-box absolute bottom-0 text-center translate-y-full flex flex-col gap-3 px-5'>
+              <p className='text-sm lg:text-base xl:leading-7'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed nisl eros. Quisque sagittis lectus eget nisi finibus, </p>
+              <a className='cursor-pointer border-pureWhite border p-2 px-6 rounded-lg self-center font-semibold'>Take a Look</a>    
+            </div>
+        </section>
     )
 }
 
