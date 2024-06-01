@@ -14,7 +14,7 @@ const ProductsPreview = () => {
           </div>
           
           <div className='flex flex-col relative gap-4 preview-container mx-auto lg:flex-row xl:gap-8'>
-            <div className='absolute w-52 h-52 bg-lightOrange -top-4 -z-10 rounded-2xl -left-4'></div>
+            <div className='absolute w-32 h-32 lg:w-52 lg:h-52 bg-lightOrange -top-4 -z-10 rounded-2xl -left-4'></div>
             <ProductPreview 
               proNum={"01"} 
               ImgSrc={starterCover} 
@@ -67,7 +67,7 @@ const ProductPreview = ({proNum, ImgSrc, title, price}) => {
 
 
             {/* Information */}
-            <div className='info-box absolute bottom-0 text-center translate-y-full flex flex-col gap-3 px-5'>
+            <div className='info-box absolute top-full text-center translate-y-full flex flex-col gap-3 px-5'>
               <p className='text-sm lg:text-base xl:leading-7'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed nisl eros. Quisque sagittis lectus eget nisi finibus, </p>
               <a className='cursor-pointer border-pureWhite border p-2 px-6 rounded-lg self-center font-semibold'>Take a Look</a>    
             </div>

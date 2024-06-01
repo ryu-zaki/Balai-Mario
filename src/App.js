@@ -1,9 +1,11 @@
 import './App.css';
+import './Animations.css';
 import AboutUs from './components/AboutUs';
 import HeroSection from './components/HeroSection';
 import NavBar from './components/NavBar';
 import ProductsPreview from './components/ProductsPreview';
 import ServicesSection from './components/ServicesSection';
+import Testimonials from './components/Testimonials';
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
      <AboutUs />
      <ProductsPreview />
      <ServicesSection />
+     <Testimonials />
      </main>
      
     </div>
