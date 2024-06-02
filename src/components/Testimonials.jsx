@@ -1,4 +1,4 @@
-import React from  'react';
+import React, { memo } from  'react';
 import messageIcon from '../assets/materials/message-icon.png';
 import starFill from '../assets/materials/star-fill.png';
 
@@ -68,7 +68,7 @@ const Testimonials = () => {
     
 
     return (
-        <div className='flex text-darkBrown testimonials-container mb-52 w-full flex-col gap-20 items-center sm:gap-20 xl:flex-row'>   
+        <div className='flex text-darkBrown testimonials-container w-full flex-col gap-20 items-center sm:gap-20 xl:flex-row'>   
           <div className='flex flex-col items-center text-center xl:items-start xl:text-left xl:gap-6'>
             <span className='text-sm mb-3'>TESTIMONIALS</span>
             <h2 className='title-font testimonial-title responsive-title'>What People Thinks About Us</h2>
@@ -87,4 +87,4 @@ const Testimonials = () => {
 }
 
 
-export default Testimonials;
+export default memo(Testimonials);

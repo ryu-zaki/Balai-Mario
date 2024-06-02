@@ -14,10 +14,12 @@
 
     /* Max Widths */
     --previewContainerWidth: 35em;
+    --googleMapMaxWidth: 45em;
 
     /* Min Heights */
     --previewContainerHeight: 40em;
     --featureOverlayMinHeight: 100%;
+    --googleMapMinHeight: 28em;
 
     /* Widths */
     --featurePicWidth: 12em;
@@ -364,6 +366,13 @@ body {
     width: var(--testimonialBoxWidth);
 }
 
+/* Location Section */
+.google-map-con {
+    border-radius: 1em;
+    width: 100%;
+    max-width: var(--googleMapMaxWidth);
+    height: var(--googleMapMinHeight);
+}
 
 @media (min-width: 375px) {
 
@@ -431,6 +440,10 @@ body {
         /* Testimonials */
         --testimonialBoxWidth: 55%;
         --testimonialScale: 1;
+
+        --googleMapMinHeight: 35em;
+
+       
     }
 
     .hero-title {
@@ -472,12 +485,6 @@ body {
         min-height: 15em;
     }
 
-    /* Products Preview */
-    .preview-container > *:hover .info-box {
-      /*   transform: translateY(-55%); */
-    
-    }
-
     /* Testimonials Section */
     .testimonials-circular {
         max-width: 35em; 
@@ -491,6 +498,12 @@ body {
     .message-modal h3 {
         font-size: .8em;
     }
+
+     /* Location Section */
+     .location-section {
+        max-width: 55em;
+     } 
+    
 }
 
 @media (min-width: 1180px) {
@@ -502,6 +515,10 @@ body {
         /* Testimonials */
         --testimonialBoxWidth: 60%;
         --testimonialScale: .9;
+
+         /* Location Section */
+         --googleMapMaxWidth: 68em;
+         --googleMapMinHeight: 40em;
     }
 
     .hero-title {
@@ -551,10 +568,6 @@ body {
         font-size: 2.5em
     }
 
-    .preview-container > *:hover .info-box {
-       /*  transform: translateY(-40%); */
-    }
-
     /* Testimonials */
     h2.testimonial-title {
 
@@ -567,6 +580,12 @@ body {
         max-width: 33em; 
      }
 
+      /* Location Section */
+      .location-section {
+        max-width: 70em;
+     } 
+
+    
 }
 
 @media (min-width: 1280px) {
