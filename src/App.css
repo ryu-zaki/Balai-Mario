@@ -33,6 +33,7 @@
     --featureOverlayHeight: 100%;
     --serviceLineHeight: .15em;
     --proSectionHeroHeight: 45vh;
+    --logregCardHeight: 33em;
 
     /* Columns */
     --productsGridColumns: repeat(2, 1fr);
@@ -488,6 +489,51 @@ body {
     translate: -2em 0;
 }
 
+/* Login Section */
+
+.logreg-main-container {
+    max-width: 25em;
+}
+
+.logreg-card {
+    height: var(--logregCardHeight);
+}
+
+.account-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: .2em;
+    background-color: #666;
+
+    top: 50%;
+    translate: 0 -50%;
+}
+
+.input-box input {
+    background-color: transparent;
+}
+
+.input-box label {
+    font-size: .9em;
+}
+
+.input-box input:hover ~ label,
+.input-box input:valid ~ label {
+    top: 0;
+    font-size: .7em;
+    z-index: 20;
+    color: var(--lightOrange);
+    background-color: var(--pureWhitw);
+    padding: 0 .5em;
+    opacity: 1;
+}
+
+.recommend-logins > div {
+    font-size: .6em;
+}
+
 @media (min-width: 375px) {
 
     :root {
@@ -530,6 +576,11 @@ body {
         column-gap: 1em;
     }
 
+    /* Login Section */
+    .recommend-logins > div {
+        font-size: .75em;
+    }
+
 }
 
 @media (min-width: 620px) {
@@ -542,6 +593,9 @@ body {
         --productsGridColumns: repeat(3, 1fr);
         --productsGridMaxWidth: 40em;
         --proSectionHeroHeight: 65vh;
+
+        /* Login Section */
+        --logregCardHeight: 44em;
     }
 
     .preview-container > *:hover {
@@ -561,6 +615,18 @@ body {
     .products-menu {
         max-width: 40em;
 
+    }
+
+    /* Login Section */
+
+    .logreg-main-container {
+        max-width: 30em;
+    }
+
+    .logreg-main-container form {
+        padding: 2.7em;
+        border-radius: 1em;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
 }
 
@@ -697,6 +763,12 @@ body {
         
          /* Products */
          --productsGridMaxWidth: 65em;
+
+         /* Location */
+         --logregCardHeight: 37em;
+
+         
+         
     }
 
     .hero-title {
@@ -806,6 +878,57 @@ body {
         color: var(--pureWhitw);
     }
 
+    /* Login Section */
+    .logreg-main-container {
+        max-width: 100%;
+    }
+    .logreg-card {
+        max-width: 60em;
+    }
+
+    .logreg-main-container form {
+        box-shadow: none;
+        background-color: transparent;
+    }
+
+    .logreg-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 50%;
+        background-color: var(--pureWhitw);
+        /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+        border: 1px solid #555;
+        transition: all .7s;
+        border-radius: 2em;
+    }
+
+    .logreg-card.register::before {
+        translate: -100% 0;
+    }
+
+    .logreg-desc {
+        position: absolute;
+        left: 0;
+        border: 1px solid red;
+        width: 60%;
+        z-index: -10;
+        background: url('./assets/business_assets/balai-mario-logo.jpg');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 90%;
+    }
+
+    .logreg-desc::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background-color: rgba(0,0,0,0.6);
+    } 
     
 }
 

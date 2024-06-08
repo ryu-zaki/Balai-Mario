@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import GoogleMaps from './components/GoogleMaps';
 import ProductSection from './components/ProductSection';
 import { Route, Routes } from 'react-router';
+import LogReg from './components/LogReg';
 
 function App() {
 
@@ -31,19 +32,45 @@ function App() {
                  <GoogleMaps />
                  </main>
              </div> 
-             <Footer />
           </>
         } />
 
         <Route path='/products' element={
           <>
            <ProductSection />
-           <Footer />
+          
           </>
         } />
 
-      </Routes>
+        <Route path='/login' element={
+          <div className='overflow-hidden'>
+             <div className='px-7 xl:px-14'>
+            <NavBar />
+            </div>
+            
+            <LogReg />
+          </div>
+            
+         
+        }
+            
+        />
 
+       <Route path='/register' element={
+          <div className='overflow-hidden'>
+          <div className='px-7 xl:px-14'>
+         <NavBar />
+         </div>
+         
+         <LogReg />
+       </div>
+         
+        }
+            
+        />
+
+      </Routes>
+      <Footer />
        
          
 
