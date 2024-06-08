@@ -23,11 +23,12 @@ module.exports = {
       'xl': '1180px',
       // => @media (min-width: 1280px) { ... }
 
-      '2xl': '1580px',
+      '2xl': '1280px',
       // => @media (min-width: 1536px) { ... }
     },
 
      colors: {
+      "ash": "#f8f8f8",
       "dark": "#0c0403",
       "darkBrown": "#2e2517",
       "darkRed": "#3b1c10",

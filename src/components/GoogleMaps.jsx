@@ -26,8 +26,8 @@ const GoogleMaps = () => {
         <h2 className="title-font responsive-title">Our Exact Location</h2>
       </div>
       
-      <div className="border-2 rounded-2xl relative border-lightOrange overflow-hidden google-map-con">
-      <iframe width="100%" height="100%" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Balai%20Mario-%20177%20Sta.%20Rosa%20Tagaytay%20Road,%20Pasong%20Langka,%20Silang,%20Cavite,%204118.+(Balai%20Mario)&amp;t=&amp;z=20&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+      <div className="border-2 rounded-2xl relative border-lightOrange overflow-hidden flex justify-center items-center google-map-con">
+      <iframe  width="100%" height="100%" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Balai%20Mario-%20177%20Sta.%20Rosa%20Tagaytay%20Road,%20Pasong%20Langka,%20Silang,%20Cavite,%204118.+(Balai%20Mario)&amp;t=&amp;z=20&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
       </div>
       <MapInfo display={"flex"} />
       

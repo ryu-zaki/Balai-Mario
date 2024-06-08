@@ -4,13 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import UserInfo from './context/UserInfo';
+import { BrowserRouter } from 'react-router-dom';
+import AnimationGSAP from './context/AnimationGSAP';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <BrowserRouter>
+    <AnimationGSAP>
     <UserInfo>
-    <App />
-    </UserInfo>
+       <App />
+      </UserInfo>
+    </AnimationGSAP>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

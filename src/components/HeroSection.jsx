@@ -6,7 +6,23 @@ import chevronRight from '../assets/materials/chevron-right.png';
 import CustomerIcon from '../assets/materials/customer-icon.jpg';
 import StarFill from '../assets/materials/star-fill.png';
 
+import kenzoImg from '../assets/icons/kenzo.jpg';
+import kingpaulImg from '../assets/icons/kingpaul.jpg';
+import marwinImg from '../assets/icons/marwin.jpg';
+import jhonwellImg from '../assets/icons/jhonwell.jpg';
+
+
+import { useNavigate } from 'react-router';
+
 const HeroSection = () => {
+
+  const navigate = useNavigate();
+
+  const resetScroll = () => {
+    window.scrollTo({
+      top: 0
+    })
+  }
 
     return (
       <div className='w-full flex justify-start relative lg:mt-10 xl:mt-0' >
@@ -51,14 +67,23 @@ const HeroSection = () => {
 
           <p className='leading-9 text-sm sm:text-base lg:pr-20 xl:text-lg xl:leading-10'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget odio ullamcorper, aliquet risus non, lacinia arcu. </p>
 
-          <div className='flex gap-7 flex-col items-center hero-btns lg:flex-row xl:mt-5'>
-            <button className='text-xs bg-lightOrange text-pureWhite p-4 px-9 rounded-full sm:text-sm'>EXPLORE OFFERS</button>
+          <div className='text-xs hero-customers justify-center font-semibold text-lightOrange flex items-center xs:text-sm'>
+             <div className='flex happy-customers'>
+              <img className='w-5 border border-pureWhite xs:w-8 rounded-full' src={jhonwellImg} alt='' />
+              <img className='w-5 border border-pureWhite xs:w-8 rounded-full -translate-x-1/4' src={kenzoImg} alt='' />
+              <img className='w-5 border border-pureWhite xs:w-8 rounded-full -translate-x-1/2' src={marwinImg} alt='' />
+              <img className='w-5 border border-pureWhite xs:w-8 rounded-full -translate-x-3/4' src={kingpaulImg} alt='' />
+             </div>
+
+             <p>700+ Happy Customers</p>
+          </div>
+
+          <div className='flex gap-7 flex-col items-center hero-btns lg:flex-row lg:mt-3'>
+            <button onClick={() => {navigate('/products'); resetScroll()}} className='text-xs bg-lightOrange text-pureWhite p-4 px-9 rounded-full sm:text-sm'>EXPLORE MENU</button>
             <button className='flex items-center gap-2 text-sm'><span>Visit Facebook Page</span><img className='w-3' src={chevronRight} alt='' /></button>
           </div>
 
-          <div>
-
-          </div>
+          
         </div>
         </div>
         </div>

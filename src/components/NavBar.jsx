@@ -1,5 +1,6 @@
-import React from "react";
-import burgerMenuIcon from '../assets/materials/burger-menu.png';
+import React, { useRef } from "react";
+import burgerMenuDark from '../assets/materials/burger-menu.png';
+import burgerMenuLight from '../assets/materials/burger-menu-light.png';
 import crossIcon from '../assets/materials/cross-icon.png';
 
 /* Navigations Images */
@@ -14,24 +15,67 @@ import homeGray from '../assets/materials/home-gray.png';
 import aboutGray from '../assets/materials/info-gray.png';
 import contactGray from '../assets/materials/contact-gray.png';
 import servicesGray from '../assets/materials/services-gray.png';
+import { useLocation, useNavigate } from "react-router";
 
 const NavBar = () => {
-
+    
+    const navigate = useNavigate();
+    const resetScroll = () => {
+        window.scrollTo({
+            top: 0
+        })
+    }
     const [sideNavVisible, setSideNavVisible] = React.useState(false);
+    const [navFixed, setNavFixed] = React.useState(false);
+    const {pathname} = useLocation();
 
+    const navBarRef = useRef(null);
+    
+    const [isProductPage, setIsProductPage] = React.useState(pathname === "/products");
 
+    React.useEffect(() => {
+        setIsProductPage(pathname === "/products");
+    }, [pathname])
+
+    React.useEffect(() => {
+       
+        const observer = new IntersectionObserver((entries) => {
+
+         entries.forEach(entry => {
+     
+            if (!entry.isIntersecting) {
+                setNavFixed(true);
+            } else {
+                setNavFixed(false);
+            }
+         })
+         
+
+        }, {})
+
+        observer.observe(navBarRef.current);
+
+    }, []);
+
+    
 
     return (
         <>
-        {sideNavVisible && <div onClick={() => setSideNavVisible(false)} className="fixed z-30 inset-0 bg-darkOverlay w-full h-full"></div>}
-
-        <div className="flex w-full items-center justify-between py-5 md:py-6 xl:py-8" >
-            <h3 className="text-2xl text-darkBrown title-font">Balai Mario</h3>
+        <div className="bg-pureWhit hidden z-30 fixed p-3 rounded-full top-6 right-6 dark-shadow">
+            <div className="absolute inset-0 cursor-pointer"></div>
+            <img className="w-6" src={burgerMenuDark} alt="" />
+        </div>
+        {sideNavVisible && <div onClick={() => setSideNavVisible(false)} className="fixed z-20 inset-0 bg-darkOverlay w-full h-full"></div>}
+        
+        <div ref={navBarRef} className={`${!isProductPage || navFixed ? "text-darkBrown" : "text-pureWhite"} ${isProductPage ? "relative px-7 xl:px-14 bg-lightOverlay md:sticky md:top-0 xl:h-20" : "relative xl:h-24"} z-40 md:h-20 w-full`}>
+        <div className={`w-full md:z-40 ${!isProductPage || navFixed ? "md:bg-pureWhite" : "bg-transparent"} ${(navFixed && !isProductPage) && "md:fixed md:top-0 md:left-0 dark-shadow md:px-7 xl:px-14 nav-bar nav-dark-shadow"}`}>
+        <div className={`flex w-full items-center justify-between z-20 ${navFixed || isProductPage ? "py-4" : "py-4 md:py-6 xl:py-7"}`} >
+            <h3 onClick={() => {navigate('/');resetScroll() }} className={`cursor-pointer ${navFixed ? "text-xl" : "text-2xl"} title-font`}>Balai Mario</h3>
 
             <nav>
-            <ul className="hidden nav-horizontal py-2 relative text-sm md:flex xl:mr-64 xl:text-base">
+            <ul className={`hidden nav-horizontal py-2 relative  md:flex xl:mr-64  ${navFixed ? "text-sm" : "text-sm xl:text-base"}`}>
                 <li className="active"><a href="/">home</a></li>
-                <li><a href="/">about us</a></li>
+                <li><a href="/">about us</a></li>   
                 <li><a href="/">contact</a></li>
                 <li><a href="/">services</a></li>
 
@@ -40,18 +84,18 @@ const NavBar = () => {
             </nav>
             
 
-            <div className="hidden gap-6 text-xs md:flex xl:relative xl:z-10 xl:text-sm">
-                <button className="border-2 border-darkBrown text-darkBrown px-7 p-2 rounded-full">Register</button>
-                <button className="bg-darkBrown text-pureWhite px-8 p-2 rounded-full">Login</button>
+            <div className={`hidden gap-6 text-xs md:flex xl:relative xl:z-10  ${navFixed ? "text-xs" : "text-xs xl:text-sm"}`}>
+                <button className={`border-2 ${!isProductPage || navFixed ? "border-darkBrown" : "border-pureWhite"} px-7 p-2 rounded-full`}>Register</button>
+                <button className={`${!isProductPage || navFixed ? "bg-darkBrown text-pureWhite" : "bg-pureWhite text-darkBrown"}  px-8 p-2 rounded-full`}>Login</button>
             </div>
 
-            <img onClick={() => setSideNavVisible(true)} draggable="false" className="select-none md:hidden" src={burgerMenuIcon} />
+            <img onClick={() => setSideNavVisible(true)} draggable="false" className={`${sideNavVisible && "scale-0 opacity-0"} transition-all duration-500 relative select-none md:hidden`} src={isProductPage ? burgerMenuLight : burgerMenuDark} />
 
 
             {/* Side Navigation */}
-            <div className={`fixed top-0 side-nav transition-all duration-700  z-30  overflow-y-auto bottom-0 bg-pureWhite left-0 p-5 px-8 flex flex-col gap-10 ${!sideNavVisible && "-translate-x-full"}`} >
+            <div className={`fixed top-0 side-nav transition-all duration-700  z-40  overflow-y-auto bottom-0 bg-pureWhite left-0 p-5 px-8 flex flex-col gap-10 ${!sideNavVisible && "-translate-x-full"}`} >
               <img onClick={() => setSideNavVisible(false)} className="w-5 h-5 absolute top-3 right-3" src={crossIcon} alt="" />
-              <h3 className="text-darkBrown title-font text-xl">Balai Mario</h3>
+              <h3 className="title-font text-darkBrown text-xl">Balai Mario</h3>
 
               <div className="border-b border-darkBrown border-b-2 pb-10">
                 <h3 className="text-gray font-semibold">Main</h3>
@@ -100,6 +144,8 @@ const NavBar = () => {
               </div>
 
             </div>
+        </div>
+        </div>
         </div>
         </>
     )
