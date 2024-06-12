@@ -65,7 +65,7 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <p className='leading-9 text-sm sm:text-base lg:pr-20 xl:text-lg xl:leading-10'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget odio ullamcorper, aliquet risus non, lacinia arcu. </p>
+          <p className='leading-9 text-sm sm:text-base lg:pr-20 xl:text-lg xl:leading-10'>Enjoy elegant cuisine and qualitty service in an ambiance tailored to create lasting memories.</p>
 
           <div className='text-xs hero-customers justify-center font-semibold text-lightOrange flex items-center xs:text-sm'>
              <div className='flex happy-customers'>

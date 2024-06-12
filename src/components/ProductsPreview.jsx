@@ -20,6 +20,7 @@ const ProductsPreview = () => {
               ImgSrc={starterCover} 
               title={"STARTER"} 
               price={220} 
+              message={"Kick off your dining experience with our delectable selection of starters. "}
             />
 
            <ProductPreview 
@@ -27,6 +28,7 @@ const ProductsPreview = () => {
               ImgSrc={vegetarianCover} 
               title={"VEGETARIAN"} 
               price={220} 
+              message={"Savor the freshness of our curated vegetarian dishes, crafted to perfection with the finest ingredients."}
             />
 
            <ProductPreview 
@@ -34,6 +36,7 @@ const ProductsPreview = () => {
               ImgSrc={chickenCover} 
               title={"CHICKEN"} 
               price={220} 
+              message={"Indulge in a variety of mouth-watering chicken dishes crafted to perfection. From classic favorites to gourmet creations."}
             />
 
             
@@ -45,7 +48,7 @@ const ProductsPreview = () => {
     )
 }
 
-const ProductPreview = ({proNum, ImgSrc, title, price}) => {
+const ProductPreview = ({proNum, ImgSrc, title, price, message}) => {
 
     return (
         <section className='relative text-pureWhite product-preview overflow-hidden rounded-xl flex justify-center'>
@@ -68,7 +71,7 @@ const ProductPreview = ({proNum, ImgSrc, title, price}) => {
 
             {/* Information */}
             <div className='info-box absolute top-full text-center translate-y-full flex flex-col gap-3 px-5'>
-              <p className='text-sm lg:text-base xl:leading-7'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In sed nisl eros. Quisque sagittis lectus eget nisi finibus, </p>
+              <p className='text-sm lg:text-base xl:leading-7'>{message}</p>
               <a className='cursor-pointer border-pureWhite border p-2 px-6 rounded-lg self-center font-semibold'>Take a Look</a>    
             </div>
         </section>

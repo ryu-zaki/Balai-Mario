@@ -15,7 +15,8 @@ import homeGray from '../assets/materials/home-gray.png';
 import aboutGray from '../assets/materials/info-gray.png';
 import contactGray from '../assets/materials/contact-gray.png';
 import servicesGray from '../assets/materials/services-gray.png';
-import { useLocation, useNavigate } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
+import { Link } from "react-scroll";
 
 const NavBar = () => {
     
@@ -32,9 +33,13 @@ const NavBar = () => {
     const navBarRef = useRef(null);
     
     const [isProductPage, setIsProductPage] = React.useState(pathname === "/products");
+    const params = useParams();
+
 
     React.useEffect(() => {
-        setIsProductPage(pathname === "/products");
+
+        setIsProductPage(pathname === "/products" || !!(params.category) && !(params.productId));
+    
     }, [pathname])
 
     React.useEffect(() => {
@@ -65,19 +70,46 @@ const NavBar = () => {
             <div className="absolute inset-0 cursor-pointer"></div>
             <img className="w-6" src={burgerMenuDark} alt="" />
         </div>
-        {sideNavVisible && <div onClick={() => setSideNavVisible(false)} className="fixed z-20 inset-0 bg-darkOverlay w-full h-full"></div>}
+        {sideNavVisible && <div onClick={() => setSideNavVisible(false)} className="fixed z-30 inset-0 bg-darkOverlay w-full h-full"></div>}
         
         <div ref={navBarRef} className={`${!isProductPage || navFixed ? "text-darkBrown" : "text-pureWhite"} ${isProductPage ? "relative px-7 xl:px-14 bg-lightOverlay md:sticky md:top-0 xl:h-20" : "relative xl:h-24"} z-40 md:h-20 w-full`}>
-        <div className={`w-full md:z-40 ${!isProductPage || navFixed ? "md:bg-pureWhite" : "bg-transparent"} ${(navFixed && !isProductPage) && "md:fixed md:top-0 md:left-0 dark-shadow md:px-7 xl:px-14 nav-bar nav-dark-shadow"}`}>
+        <div className={`w-full md:z-50 ${!isProductPage || navFixed ? "md:bg-pureWhite" : "bg-transparent"} ${(navFixed && !isProductPage) && "md:fixed md:top-0 md:left-0 dark-shadow md:px-7 xl:px-14 nav-bar nav-dark-shadow"}`}>
         <div className={`flex w-full items-center justify-between z-20 ${navFixed || isProductPage ? "py-4" : "py-4 md:py-6 xl:py-7"}`} >
             <h3 onClick={() => {navigate('/');resetScroll() }} className={`cursor-pointer ${navFixed ? "text-xl" : "text-2xl"} title-font`}>Balai Mario</h3>
 
             <nav>
             <ul className={`hidden nav-horizontal py-2 relative  md:flex xl:mr-64  ${navFixed ? "text-sm" : "text-sm xl:text-base"}`}>
-                <li className="active"><a href="/">home</a></li>
-                <li><a href="/">about us</a></li>   
-                <li><a href="/">contact</a></li>
-                <li><a href="/">services</a></li>
+                <li className="active">
+                    <Link 
+                      offset={-200} 
+                      to="hero"
+                      smooth={true}
+                    >home</Link>
+                </li>
+
+                <li>
+                    <Link 
+                      offset={-100}
+                      to="about-us"
+                      smooth={true}
+                    >about us</Link>
+                </li>   
+
+                <li>
+                    <Link 
+                      offset={-100}
+                      to="products-preview"
+                      smooth={true}
+                    >products</Link>
+                </li>
+
+                <li>
+                    <Link 
+                      offset={-100}
+                      to="location"
+                      smooth={true}
+                    >location</Link>
+                </li>
 
                 <div className="nav-active-effect"></div>
             </ul>
@@ -85,8 +117,8 @@ const NavBar = () => {
             
 
             <div className={`hidden gap-6 text-xs md:flex xl:relative xl:z-10  ${navFixed ? "text-xs" : "text-xs xl:text-sm"}`}>
-                <button className={`border-2 ${!isProductPage || navFixed ? "border-darkBrown" : "border-pureWhite"} px-7 p-2 rounded-full`}>Register</button>
-                <button className={`${!isProductPage || navFixed ? "bg-darkBrown text-pureWhite" : "bg-pureWhite text-darkBrown"}  px-8 p-2 rounded-full`}>Login</button>
+                <button onClick={() => navigate('/register')} className={`border-2 ${!isProductPage || navFixed ? "border-darkBrown" : "border-pureWhite"} px-7 p-2 rounded-full`}>Register</button>
+                <button onClick={() => navigate('/login')} className={`${!isProductPage || navFixed ? "bg-darkBrown text-pureWhite" : "bg-pureWhite text-darkBrown"}  px-8 p-2 rounded-full`}>Login</button>
             </div>
 
             <img onClick={() => setSideNavVisible(true)} draggable="false" className={`${sideNavVisible && "scale-0 opacity-0"} transition-all duration-500 relative select-none md:hidden`} src={isProductPage ? burgerMenuLight : burgerMenuDark} />

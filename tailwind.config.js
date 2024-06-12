@@ -35,6 +35,8 @@ module.exports = {
       "brown": "#90591a",
       "gray": "#555",
       "lightOrange": "#c46e24",
+      
+      "lighterOrange": "rgba(196,110,34,.2)",
       "pureWhite": "#fff",
 
       /* Overlay */

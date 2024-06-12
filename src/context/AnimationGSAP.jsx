@@ -8,11 +8,15 @@ const ComponentContext = createContext(null);
 const AnimationGSAP = ({children}) => {
     
     gsap.registerPlugin(ScrollTrigger);
+    const matchMedia = gsap.matchMedia();
 
     const productSecMarkerRef = useRef(null);
     const {pathname} = useLocation();
     const bgTextRef = useRef(null);
     const bgTextBottomRef = useRef(null);
+    const allProductsTitleSticky = useRef(null);
+    const footerRef = useRef(null);
+    
 
     React.useEffect(() => {
 
@@ -59,12 +63,28 @@ const AnimationGSAP = ({children}) => {
         }
 
         
+        matchMedia.add("(min-width: 970px)", () => {
+
+            gsap.to(allProductsTitleSticky.current, {
+                scrollTrigger: {
+                    start: 'top top',
+                    end: 'bottom 0%',
+                    trigger: allProductsTitleSticky.current,
+                    scrub: 2,
+                },
+                
+                scale: .4,
+                background: '#f8f8f8',
+                border: "1px solid #2e2517"
+            })
+
+        })
         
     }, [pathname]);
 
     return(
         <ComponentContext.Provider 
-        value={{productSecMarkerRef, bgTextRef, bgTextBottomRef}}
+        value={{productSecMarkerRef, bgTextRef, bgTextBottomRef, allProductsTitleSticky, footerRef}}
         >
 
           {children}

@@ -29,7 +29,7 @@ const AboutUs = () => {
 
             <div className='p-3 py-16 pb-24 relative rounded-xl text-center text-pureWhite bg-lightOrange space-y-6 grid-col-span-2 flex flex-col items-center mb-10 xxs:px-6 lg:px-10 lg:text-left lg:items-start lg:space-y-8 lg:py-12 lg:mb-0 xl:py-12 xl:space-y-5 xl:px-12'>
                 <h3 className=' text-2xl font-bold sm:text-3xl xl:text-4xl'>Traditional and Modern</h3>
-                <p className='text-sm xxs:text-base xl:leading-8'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p className='text-sm xxs:text-base xl:leading-8'>We believe in the timeless value of traditional recipes. Each dish is a tribute to our roots, capturing the essence of time-honored cooking methods that have stood the test of time.</p>
                 <button className='border-pureWhite button-scale-effect border-2 p-3 px-7 rounded-md text-pureWhite text-xs xxs:text-sm'>READ MORE</button>
 
                 {/* Quote Message */}

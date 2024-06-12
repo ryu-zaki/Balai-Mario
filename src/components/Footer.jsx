@@ -10,12 +10,13 @@ import tiktokLight from '../assets/materials/tiktok-light-outline.png';
 import mailIcon from '../assets/materials/mail-light-outline.png';
 import phoneIcon from '../assets/materials/phone-light-outline.png';
 import pinIcon from '../assets/materials/pin-light-outline.png';
+import { useAnimationGSAP } from '../context/AnimationGSAP';
 
 
 const Footer = () => {
-
+    const {footerRef} = useAnimationGSAP();
     return (
-        <footer className="bg-lightOrange text-pureWhite p-8 flex flex-col gap-10 items-center lg:p-16 lg:pb-8 xl:gap-14">
+        <footer ref={footerRef} className="bg-lightOrange text-pureWhite p-8 flex flex-col gap-10 items-center lg:p-16 lg:pb-8 xl:gap-14">
 
            {/* Navigations */}
            <section className="flex flex-col gap-8 items-center text-center md:flex-row md:items-start md:text-left md:w-full md:justify-between">

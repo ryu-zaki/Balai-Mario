@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import UserInfo from './context/UserInfo';
 import { BrowserRouter } from 'react-router-dom';
 import AnimationGSAP from './context/AnimationGSAP';
+import AvailableRecipes from './context/AvailableRecipes';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <BrowserRouter>
     <AnimationGSAP>
     <UserInfo>
-       <App />
+      <AvailableRecipes>
+        <App />
+      </AvailableRecipes>
       </UserInfo>
     </AnimationGSAP>
     </BrowserRouter>

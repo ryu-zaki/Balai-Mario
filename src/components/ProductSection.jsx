@@ -6,15 +6,17 @@ import sampleProduct from '../assets/products/sample-product.jpg';
 import heartIcon from '../assets/materials/heart-icon.png';
 import starFill from '../assets/materials/star-fill.png';
 import { useAnimationGSAP } from '../context/AnimationGSAP';
+import { Outlet, useNavigate } from 'react-router';
+import { Element } from 'react-scroll';
 
 const ProductSection = () => {
 
-    const {productSecMarkerRef, bgTextRef, bgTextBottomRef} = useAnimationGSAP();
+    const {productSecMarkerRef} = useAnimationGSAP();
     
     
     
     return (
-        <div> 
+        <div className='product-section'> 
             <div className='text-darkBrown product-section-hero relative '>
               <NavBar />
               <div className='px-7 xl:px-14'>
@@ -30,11 +32,6 @@ const ProductSection = () => {
                  
                  <div className='product-sec-sub overflow-hidden text-xs xs:text-sm sm:text-base xl:text-lg'><p className='block'>You have <b>700</b> recipes to explore!</p></div>
 
-                {/* <div className='product-search-con w-11/12 mt-10 h-10 z-20 rounded-full relative overflow-hidden text-darkBrown text-sm flex items-center xs:h-12 lg:h-14'>
-                    <input className='border-0 outline-0  absolute p-3 pr-10 inset-0 lg:text-base lg:p-5 lg:pr-14' id="product-search" placeholder='Search Product' />
-                    <img className='absolute right-3 w-5 lg:w-7 lg:right-5' src={seachIcon} alt='' /> 
-                </div> */}
-
               </div>
 
               {/* Marker at the bottom */}
@@ -42,45 +39,15 @@ const ProductSection = () => {
             </div>
             </div>
 
-            {/* Products Grid */}
-            <div className='w-full pb-32 relative z-10 bg-ash pt-28 lg:pt-40 xl:pt-20'>
-
-                <NavigationFilter mobileVer={true} />
-
-                <div className='w-full nav-filter-con relative z-10 flex gap-6 flex-col justify-center items-center md:flex-row md:sticky md:top-6 md:mx-auto xl:gap-10'>
-                <NavigationFilter mobileVer={false} />
-
-                <div className='product-search-con border border-lightOrange w-11/12 h-10 z-20 rounded-full relative overflow-hidden text-darkBrown text-sm flex items-center xs:h-12 md:w-1/3 lg:h-14'>
-                    <input className='border-0 outline-0  absolute p-3 pr-10 inset-0 lg:text-base lg:p-5 lg:pr-14' id="product-search" placeholder='Search Product' />
-                    <img className='absolute right-3 w-5 lg:w-7 lg:right-5' src={seachIcon} alt='' /> 
-                </div>
-
-                </div>
-
-                <div className='relative products-grid-container mx-auto mt-32 sm:mt-40 lg:mt-52 xl:mt-60'>
-                  <AvailableDish />
-                  <AvailableDish />
-                  <AvailableDish />
-                  <AvailableDish />
-                  <AvailableDish />
-                  <AvailableDish />
-                  <AvailableDish />
-                  <AvailableDish />
-                  <AvailableDish />
-                  <h2 ref={bgTextRef} className='select-none absolute bg-text -top-24 left-0 opacity-50 -z-10 text-brown title-font text-6xl xs:text-7xl lg:-top-32 lg:text-8xl xl:text-9xl xl:-top-40 xl:-left-14 2xl:-left-24'>Balai Mario</h2>
-
-
-                  {/* <h2 ref={bgTextBottomRef} className='absolute bottom-52 right-0 bg-text-bottom opacity-50 -z-10 text-brown title-font text-6xl xs:text-7xl lg:text-8xl lg:bottom-64 lg:-right-14 xl:text-9xl xl:bottom-80 2xl:-right-24'>Balai Mario</h2> */}
-                </div>
-                
-            </div>
-            
+            <CategorySection />        
         </div>
     )
 }
 
 
-const AvailableDish = () => {
+export const AvailableDish = () => {
+
+    const navigate = useNavigate();
 
     return (
         <div className='dark-shadow bg-pureWhite dish-box relative p-3 pt-16 flex flex-col items-center justify-end xs:p-4 xs:pt-16 lg:pt-24 lg:p-5 xl:pt-28 xl:p-6'>
@@ -96,14 +63,6 @@ const AvailableDish = () => {
                 
                 <div className='flex items-center text-xs justify-between lg:text-sm xl:text-base'>
                     <span className='text-lightOrange font-semibold'>$200.00</span>
-                    {/* <div className='flex xs:gap-1'>
-                      <img draggable={false} className='w-3 lg:w-4 xl:w-5' src={starFill} alt="" />
-                      <img draggable={false} className='w-3 lg:w-4 xl:w-5' src={starFill} alt="" />
-                      <img draggable={false} className='w-3 lg:w-4 xl:w-5' src={starFill} alt="" />
-                      <img draggable={false} className='w-3 lg:w-4 xl:w-5' src={starFill} alt="" />
-                      <img draggable={false} className='w-3 lg:w-4 xl:w-5' src={starFill} alt="" />
-                    </div> */}
-
                     <div className='flex items-center text-xs gap-2 lg:text-sm lg:gap-3 xl:text-base xl:gap-4'>
                       <p className='border-lightOrange border rounded-full cursor-pointer px-2'>+</p>
                       <p className='text-darkBrown font-semibold'>1</p>
@@ -115,7 +74,7 @@ const AvailableDish = () => {
                 <div className='w-full gap-2 mt-3 flex flex-col items-stretch justify-between lg:flex-row'>
                   <button className='flex-grow text-pureWhite text-xs bg-lightOrange p-2 rounded-lg lg:text-xs lg:p-3 xl:p-4 xl:rounded-xl'>ADD TO DISH</button>
 
-                  <button className='flex-grow text-lightOrange border-lightOrange border text-xs p-2 rounded-lg lg:text-xs lg:p-3 xl:p-4 xl:rounded-xl'>DETAILS</button>
+                  <button onClick={() => navigate('sjsc')} className='flex-grow text-lightOrange border-lightOrange border text-xs p-2 rounded-lg lg:text-xs lg:p-3 xl:p-4 xl:rounded-xl'>DETAILS</button>
                 </div>
                 
             </div>
@@ -136,5 +95,32 @@ const NavigationFilter = ({mobileVer}) => {
       </nav>
   )
 }
+
+
+
+const CategorySection = () => {
+
+  const {allProductsTitleSticky} = useAnimationGSAP() ;
+
+  return (
+    <Element name='available-recipe' className='bg-ash pt-20 flex flex-col items-center pb-10 relative lg:pt-10'>
+      <div className='z-30 product-search-con w-full flex flex-col items-center gap-4 lg:flex-row lg:justify-between lg:w-11/12 lg:sticky lg:top-3'>
+        <h2 ref={allProductsTitleSticky} className='text-2xl font-semibold rounded-full origin-left xs:text-3xl sm:text-4xl lg:inline'>Available <span className='text-lightOrange'>Recipes</span></h2>
+        <div className='hidden sticky top-3 flex overflow-hidden rounded-full items-center relative h-11 border border-gray w-11/12 lg:flex lg:h-14'>
+          <img className='w-6 absolute left-3 z-10' src={seachIcon} alt='' />
+          <input placeholder='Search Recipe' className='pl-12 text-darkBrown absolute outline-0 border-0 inset-0 h-full w-full' id="search-category" />
+        </div>
+      </div>
+
+      <div className='sticky top-3 z-30 mt-4 flex overflow-hidden rounded-full items-center relative h-11 border border-gray w-11/12 max-w-96 sm:mt-8 sm:h-14 lg:hidden'>
+          <img className='w-6 absolute left-2 z-10 sm:w-7 lg:left-4' src={seachIcon} alt='' />
+          <input placeholder='Search Recipe' className='pl-10 text-darkBrown absolute outline-0 border-0 inset-0 h-full w-full' id="search-category" />
+        </div>
+
+      <Outlet/>
+    </Element>
+  )
+}
+
 
 export default ProductSection;

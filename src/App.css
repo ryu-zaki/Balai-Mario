@@ -17,6 +17,7 @@
     --googleMapMaxWidth: 45em;
     --searchConMaxWidth: 30em;
     --productsGridMaxWidth: 27em;
+    --invImageMaxWidth: 23em;
 
     /* Min Heights */
     --previewContainerHeight: 40em;
@@ -424,6 +425,14 @@ body {
     max-width: var(--searchConMaxWidth);
 }
 
+.product-search-con h2 {
+    border: 1px solid var(--pureWhitw);
+}
+
+.product-search-con > div {
+    max-width: 28em;
+}
+
 .products-grid-container {
     display: grid;
     width: 95%;
@@ -519,7 +528,7 @@ body {
     font-size: .9em;
 }
 
-.input-box input:hover ~ label,
+.input-box input:focus ~ label,
 .input-box input:valid ~ label {
     top: 0;
     font-size: .7em;
@@ -533,6 +542,125 @@ body {
 .recommend-logins > div {
     font-size: .6em;
 }
+
+/* Individual Product Section */
+.inv-main-img {
+    width: 80%;
+    aspect-ratio: 1;
+    max-width: var(--invImageMaxWidth);
+    translate: 3em 0;
+}
+
+.inv-info-nav > .active {
+    position: relative;
+}
+
+.inv-info-nav > .active::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    background: var(--lightOrange);
+    width: 100%;
+    height: 2px;;
+    left: 0;
+}
+
+.inv-img-wrapper {
+    max-width: var(--invImageMaxWidth);
+}
+
+.inv-img-wrapper::before {
+    content: '';
+    position: absolute;
+    height: 118%;
+    width: 107%;
+    right: -3em;
+    background: linear-gradient(90deg, var(--lightOrange), var(--lightOrange),var(--pureWhitw));
+    z-index: -1;
+
+    border-top-left-radius: 27em;
+    border-bottom-left-radius: 27em;
+
+}
+
+.inv-suggested-recipe {
+    background: url('./assets/products/sample-product.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    width: 45%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.inv-suggested-recipe > * {
+    font-size: .6em;
+}
+.inv-suggested-recipe > *  p {
+    font-size: .5em;
+    letter-spacing: .15em;
+}
+
+.feature-blog-imgs img, 
+.feature-blog-imgs  > div::before{
+    border-radius: .5em;
+}
+
+.feature-blog-imgs > div::before {
+    content: '';
+    position: absolute;
+    background-color: var(--lightOrange);
+    inset: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    translate: .5em .5em;
+}
+
+.product-section .featured-product h3 {
+    font-size: .6em;
+    letter-spacing: 1.4px;
+
+}
+.product-category-section {
+    max-width: 35em;
+}
+
+.product-category-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: #555;
+    width: 100%;
+
+    left: 0;
+}
+
+.featured-product h3::before {
+    content: '';
+    position: absolute;
+    background-color: var(--lightOrange); 
+    z-index: -1;
+
+    border-radius: 50%;
+    width: 20%;
+    aspect-ratio: 1;
+    scale: 0;
+    transition: all .65s;
+}
+
+.featured-product:hover h3 {
+    color: var(--pureWhitw);
+    transition: all .7s;
+}
+ 
+.featured-product:hover h3::before {
+    scale: 5;
+    opacity: 1;
+}
+
 
 @media (min-width: 375px) {
 
@@ -581,6 +709,32 @@ body {
         font-size: .75em;
     }
 
+    /* Individual Product Page */
+
+    .inv-img-wrapper::before {
+       
+        width: 80%;
+        aspect-ratio: 1;
+        height: auto;
+        /* z-index: 20; */
+        border-top-left-radius: 50%;
+        border-bottom-left-radius: 50%;
+        border-radius: 50%;
+        right: auto;
+        scale: 1.15;
+    }
+
+    .inv-main-img {
+        translate: 0 0;
+    }
+
+    .inv-suggested-recipe > * {
+        font-size: .8em;
+    }
+    .inv-suggested-recipe > *  p {
+        font-size: .7em;
+        letter-spacing: .15em;
+    }
 }
 
 @media (min-width: 620px) {
@@ -617,6 +771,12 @@ body {
 
     }
 
+    .product-category-section > section:nth-child(1) {
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        padding: 2.5em;
+
+    }
+
     /* Login Section */
 
     .logreg-main-container {
@@ -628,9 +788,23 @@ body {
         border-radius: 1em;
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
+
+    /* Individual Page */
+    .inv-suggested-recipe > * {
+        font-size: .9em;
+    }
+    .inv-suggested-recipe > *  p {
+        font-size: .8em;
+    }
+
+    
 }
 
 @media (min-width: 768px) {
+
+    :root {
+        --blogFeatureWidth: 44em;
+    }
 
     .nav-bar {
         translate: 0 -100%;
@@ -639,6 +813,15 @@ body {
 
     .nav-dark-shadow {
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .blog-feature-section {
+        width: var(--blogFeatureWidth);
+        margin-inline: auto;
+    }
+
+    .feature-blog-imgs > div::before {
+        translate: 1em 1em;
     }
     
 }
@@ -662,9 +845,12 @@ body {
         --googleMapMinHeight: 30em;
 
         /* Products */
-        --searchConMaxWidth: 35em;
+        --searchConMaxWidth: 75em;
         --productsGridMaxWidth: 55em;
         --proSectionHeroHeight: 75vh;
+
+        /* Individual Page */
+        --blogFeatureWidth: 55em;
        
     }
 
@@ -744,7 +930,53 @@ body {
     .products-menu > button:nth-child(2).active ~ div {
         left: 18%; /* 22 */
     }
+
+    .product-category-section,
+    .category-controls {
+        max-width: 75em;
+        width: 100%;
+    }
+
+    .individual-category-container > section {
+        display: flex;
+        align-items: center;
+    }
+
+    .individual-category-container > section:nth-child(even) {
+        
+        flex-direction: row-reverse;
+    }
+
+    .individual-category-container .featured-product {
+        width: 32%;
+    }
+
     
+    /* Individual Product Page */
+    .inv-main-img {
+        width: 90%;
+    }
+
+    .inv-img-wrapper::before {
+        scale: 1.25;
+    }
+
+    .inv-main-desc {
+        width: 35em;
+        max-width: 100%;
+    }
+
+    .inv-suggested-recipe > * {
+        font-size: 1em;
+    }
+    .inv-suggested-recipe > *  p {
+        font-size: .9em;
+    }
+
+    /* Products section */
+    .product-search-con h2 {
+    padding: 40px;
+    }
     
 }
 
@@ -765,7 +997,7 @@ body {
          --productsGridMaxWidth: 65em;
 
          /* Location */
-         --logregCardHeight: 37em;
+         --logregCardHeight: 35em;
 
          
          
@@ -889,6 +1121,8 @@ body {
     .logreg-main-container form {
         box-shadow: none;
         background-color: transparent;
+        z-index: 30;
+        padding-inline: 4em;
     }
 
     .logreg-card::before {
@@ -902,6 +1136,7 @@ body {
         /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
         border: 1px solid #555;
         transition: all .7s;
+        z-index: 20;
         border-radius: 2em;
     }
 
@@ -910,17 +1145,24 @@ body {
     }
 
     .logreg-desc {
+        border-radius: 2em;
+        overflow: hidden;
         position: absolute;
         left: 0;
-        border: 1px solid red;
         width: 60%;
-        z-index: -10;
+        z-index: 0;
         background: url('./assets/business_assets/balai-mario-logo.jpg');
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
         height: 90%;
+        transition: all 1s;
     }
+
+    .logreg-desc.register {
+        translate: 66% 0;
+    }
+
 
     .logreg-desc::before {
         content: '';
@@ -928,11 +1170,43 @@ body {
         inset: 0;
         z-index: -1;
         background-color: rgba(0,0,0,0.6);
+        backdrop-filter: blur(.2em);
     } 
     
+    /* Individual Product Page */
+    .inv-section > .inv-hero {
+        min-height: 80vh;
+    }
+
+    .inv-img-wrapper {
+        min-height: 90vh;
+    }
+
+    .inv-main-img {
+        width: 100%;
+        translate: 0 2em;
+    }
+
+    .inv-img-wrapper::before {
+        scale: 1;
+        width: 115%;
+        height: 100%;
+        background: linear-gradient(var(--lightOrange), var(--lightOrange),var(--pureWhitw));
+        bottom: 0;
+        border-top-left-radius: 30em;
+        border-top-right-radius: 30em;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
 }
 
 @media (min-width: 1280px) {
+    
+    :root {
+        --invImageMaxWidth: 27em;
+        --blogFeatureWidth: 70em;
+    }
+    
     .seperated-feature {
         padding-top: 6em;
     }
@@ -951,9 +1225,30 @@ body {
         padding-right: .5em;
     }
 
+     /* Individual Product */
+     .blog-feature-section h2 {
+        font-size: 4.5em;
+        padding-right: 4em;
+     }
 
+     /* Products Section */
+     .product-category-section {
+        max-width: 80em;
+     }
 
+     .category-controls {
+        max-width: 90em;
+     }
+
+     .product-section .featured-product h3 {
+        font-size: .9em;
+        letter-spacing: normal;
     
+    }
+    
+    .individual-category-container .featured-product {
+        width: 32%;
+    }
 }
 
 @media (min-width: 1580px) {
