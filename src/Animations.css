@@ -261,6 +261,27 @@
     animation: stateBack 1s 1s forwards;
 }
 
+.bg-text {
+    animation: bgTextBack .9s .1s forwards;
+}
+
+.menu-back img.anim {
+    animation: arrowAnim .8s infinite;
+}
+
+@keyframes arrowAnim {
+    to {
+        translate: -1.3em 0;
+        opacity: 0;
+    }
+}
+
+@keyframes bgTextBack {
+    to {
+        translate: 0 0;
+    }
+} 
+
 @media (min-width: 970px) {
     .product-category-section .featured-product {
         translate: -50% 0;

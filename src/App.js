@@ -10,7 +10,7 @@ import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import GoogleMaps from './components/GoogleMaps';
 import ProductSection from './components/ProductSection';
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useLocation } from 'react-router';
 import LogReg from './components/LogReg';
 import IndividualProduct from './components/IndividualProduct';
 import CategoryProducts from './components/CategoryProducts';
@@ -20,6 +20,7 @@ import { Element, Link, scroller } from 'react-scroll';
 
 function App() {
   const {categories} = useAvailableRecipes();
+  const {pathname} = useLocation();
   const [controlsIndex, setControlsIndex] = React.useState(0);
   const [slideNum, setSlideNum] = React.useState(1);
   const resetterBtnRef = useRef(null);
@@ -45,6 +46,13 @@ function App() {
     if (!controlsIndex) return;
     scroller.scrollTo('available-recipe');
   }
+
+  React.useEffect(() => {
+
+    setSlideNum(1);
+    setControlsIndex(0);
+
+  }, [pathname])
   return (
     <div className='w-full'>
       
@@ -95,7 +103,7 @@ function App() {
                 <button onClick={handleNextSlide} className={`${controlsIndex + 3 >= categories.length ? "cursor-not-allowed bg-lightOverlay" : "bg-lightOrange"} transition-all duration-500 py-3 px-8 rounded-xl`}>Next</button>
               </div>
 
-              <p className='flex font-bold gap-3 text-gray'><span className=' text-lightOrange'>{slideNum}</span>of<span className='text-lightOrange'>{categories.length / 3}</span></p>
+              <p className='flex font-bold gap-3 text-gray'><span className=' text-lightOrange'>{slideNum}</span>of<span className='text-lightOrange'>{Math.ceil(categories.length / 3)}</span></p>
              </div>
            </div>
             } />

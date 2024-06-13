@@ -1,6 +1,6 @@
 import React from 'react';
 import haloHalo from '../assets/products/halo-halo.jpg';
-import beefBroccoli from '../assets/products/beef-broccoli.jpg';
+import beefBroccoli from '../assets/products/beef broccoli.jpg';
 import quoteSign from '../assets/materials/quote-sign.png';
 
 const BlogFeature = () => {

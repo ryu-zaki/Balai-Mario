@@ -1,7 +1,8 @@
 import React, { useRef } from  'react';
 import NavBar from './NavBar';
 import heroImg from '../assets/business_assets/hero-img-product.jpg';
-import seachIcon from '../assets/materials/search-icon.png'
+import seachIcon from '../assets/materials/search-icon.png';
+import chevronIcon from '../assets/materials/chevron-right.png';
 import sampleProduct from '../assets/products/sample-product.jpg';
 import heartIcon from '../assets/materials/heart-icon.png';
 import starFill from '../assets/materials/star-fill.png';
@@ -45,24 +46,32 @@ const ProductSection = () => {
 }
 
 
-export const AvailableDish = () => {
+export const AvailableDish = ({data}) => {
+
+    const {recipeName, price, image} = data;
+    const [variant, setVariant] = React.useState("whole");
 
     const navigate = useNavigate();
 
+
+    const handleVariant = ({target}) => {
+      setVariant(target.id);
+    }
+
     return (
         <div className='dark-shadow bg-pureWhite dish-box relative p-3 pt-16 flex flex-col items-center justify-end xs:p-4 xs:pt-16 lg:pt-24 lg:p-5 xl:pt-28 xl:p-6'>
-            <img draggable={false} className='border-4 border-pureWhite w-2/3 select-none -translate-y-1/2 rounded-full absolute top-0 aspect-1 max-w-24 lg:max-w-32 xl:max-w-40' src={sampleProduct} alt='' />
+            <img draggable={false} className='object-cover border-4 border-lightOrange w-2/3 select-none -translate-y-1/2 rounded-full absolute top-0 aspect-1 max-w-24 lg:max-w-32 xl:max-w-40' src={image} alt='' />
             <div className='w-full flex flex-col gap-3 xl:gap-5'>
-                <div className='flex justify-between gap-1 items-center'>
-                  <h3 className='text-xs font-semibold xs:text-sm lg:text-lg xl:text-xl'>Special Bulalo</h3>
+                <div className='flex justify-between gap-1 items-start'>
+                  <h3 className='text-xs font-semibold xs:text-sm lg:text-lg xl:text-xl'>{recipeName}</h3>
                   <div className='flex gap-1 text-xs items-center text-lightOrange font-semibold lg:text-sm'>
-                    <img draggable={false} className='w-4 select-none cursor-pointer xs:w-5 lg:w-7' src={heartIcon} alt='' />
+                    <img draggable={false} className='object-cover w-4 select-none cursor-pointer xs:w-5 lg:w-7' src={heartIcon} alt='' />
                     <p>32</p>
                   </div>
                 </div>
                 
                 <div className='flex items-center text-xs justify-between lg:text-sm xl:text-base'>
-                    <span className='text-lightOrange font-semibold'>$200.00</span>
+                    <span className='text-lightOrange font-semibold'>&#8369;{typeof price === "number" ? price.toFixed(2) : price[variant].toFixed(2)}</span>
                     <div className='flex items-center text-xs gap-2 lg:text-sm lg:gap-3 xl:text-base xl:gap-4'>
                       <p className='border-lightOrange border rounded-full cursor-pointer px-2'>+</p>
                       <p className='text-darkBrown font-semibold'>1</p>
@@ -70,6 +79,16 @@ export const AvailableDish = () => {
                     </div>
                    
                 </div>
+
+                {
+                  typeof price !== "number" && (
+                    <div className='chicken-part-option flex gap-2 text-xs text-darkBrown mt-3 justify-center xxs:gap-4 xxs:justify-start lg:mt-0'>
+                      <button onClick={handleVariant} id="whole" className={`${variant === "whole" && "active"} light-shadow py-1 px-4 rounded-full xxs:px-6 lg:py-2`}>Whole</button>
+                      <button onClick={handleVariant} id="half" className={`${variant === "half" && "active"} py-1 px-4 rounded-full xxs:px-6 lg:py-2`}>Half</button>
+                    </div>
+                  )
+                }
+                
                 
                 <div className='w-full gap-2 mt-3 flex flex-col items-stretch justify-between lg:flex-row'>
                   <button className='flex-grow text-pureWhite text-xs bg-lightOrange p-2 rounded-lg lg:text-xs lg:p-3 xl:p-4 xl:rounded-xl'>ADD TO DISH</button>
@@ -99,20 +118,36 @@ const NavigationFilter = ({mobileVer}) => {
 
 
 const CategorySection = () => {
+  const navigate = useNavigate();
+  const [arrowAnim, setArrowAnim] = React.useState(false);
 
-  const {allProductsTitleSticky} = useAnimationGSAP() ;
+  const {allProductsTitleSticky} = useAnimationGSAP();
+
+  const handleMenuSelect = () => {
+
+    navigate('/');
+    window.scrollTo({top: 0})
+
+  }
 
   return (
-    <Element name='available-recipe' className='bg-ash pt-20 flex flex-col items-center pb-10 relative lg:pt-10'>
-      <div className='z-30 product-search-con w-full flex flex-col items-center gap-4 lg:flex-row lg:justify-between lg:w-11/12 lg:sticky lg:top-3'>
-        <h2 ref={allProductsTitleSticky} className='text-2xl font-semibold rounded-full origin-left xs:text-3xl sm:text-4xl lg:inline'>Available <span className='text-lightOrange'>Recipes</span></h2>
-        <div className='hidden sticky top-3 flex overflow-hidden rounded-full items-center relative h-11 border border-gray w-11/12 lg:flex lg:h-14'>
+    <Element name='available-recipe' className='bg-ash pt-14 flex flex-col items-center pb-10 relative sm:pt-20 lg:pt-20'>
+      <h2 ref={allProductsTitleSticky} className='text-2xl font-semibold rounded-full origin-left xs:text-3xl sm:text-4xl lg:text-5xl lg:inline'>Available <span className='text-lightOrange'>Recipes</span></h2>
+
+
+      <div className='mt-10 z-30 product-search-con w-full flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:w-11/12 lg:sticky lg:top-3 lg:mt-14'>
+        <div className='flex bg-ash menu-back py-3 dark-shadow rounded-full px-6 gap-2 relative items-center text-xs lg:px-8 lg:text-sm 2xl:text-base'>
+          <div onClick={handleMenuSelect} onMouseLeave={() => setArrowAnim(false)} onMouseOver={() => setArrowAnim(true)} className='absolute z-10 inset-0 cursor-pointer'></div>
+          <img className={`${arrowAnim && "anim"} rotate-180 w-4`} src={chevronIcon} alt='' />
+          <p>Menu Selection</p>
+        </div>
+        <div className='hidden sticky top-3 flex overflow-hidden rounded-full items-center relative h-11 border border-gray w-11/12 sm:max-w-80 sm:flex lg:h-14'>
           <img className='w-6 absolute left-3 z-10' src={seachIcon} alt='' />
           <input placeholder='Search Recipe' className='pl-12 text-darkBrown absolute outline-0 border-0 inset-0 h-full w-full' id="search-category" />
         </div>
       </div>
 
-      <div className='sticky top-3 z-30 mt-4 flex overflow-hidden rounded-full items-center relative h-11 border border-gray w-11/12 max-w-96 sm:mt-8 sm:h-14 lg:hidden'>
+      <div className='sticky top-3 z-30 mt-4 flex overflow-hidden rounded-full items-center relative h-11 border border-gray w-11/12 max-w-96 sm:mt-8 sm:h-14 sm:hidden'>
           <img className='w-6 absolute left-2 z-10 sm:w-7 lg:left-4' src={seachIcon} alt='' />
           <input placeholder='Search Recipe' className='pl-10 text-darkBrown absolute outline-0 border-0 inset-0 h-full w-full' id="search-category" />
         </div>
