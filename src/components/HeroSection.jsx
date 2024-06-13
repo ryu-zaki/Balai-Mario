@@ -29,7 +29,7 @@ const HeroSection = () => {
         <div className='flex relative mx-auto text-center items-center text-darkBrown hero-section  lg:text-left '>
           <div  className='hero-description flex flex-col gap-10 lg:gap-7 lg:items-start'>
           <div>
-            <h1 className='hero-title px-5 title-font mb-8 lg:mb-0 lg:px-0'>Gourmet Delights in an Elegant Setting</h1>
+            <h1 className='hero-title px-0 title-font mb-8 xs:px-4 lg:mb-0 lg:px-0'>Gourmet Delights in an Elegant Setting</h1>
             <div className='relative mx-auto hero-img lg:absolute lg:right-4 lg:top-1/2 lg:-translate-y-1/2 xl:right-0'>
               <MessageModal 
                 message={<>You deserve more than just a meal—you deserve a feast.&#128151;&#128151;</>}

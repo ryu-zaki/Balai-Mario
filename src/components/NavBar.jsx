@@ -70,7 +70,7 @@ const NavBar = () => {
             <div className="absolute inset-0 cursor-pointer"></div>
             <img className="w-6" src={burgerMenuDark} alt="" />
         </div>
-        {sideNavVisible && <div onClick={() => setSideNavVisible(false)} className="fixed z-30 inset-0 bg-darkOverlay w-full h-full"></div>}
+        {sideNavVisible && <div onClick={() => setSideNavVisible(false)} className="fixed z-40 inset-0 bg-darkOverlay w-full h-full"></div>}
         
         <div ref={navBarRef} className={`${!isProductPage || navFixed ? "text-darkBrown" : "text-pureWhite"} ${isProductPage ? "relative px-7 xl:px-14 bg-lightOverlay md:sticky md:top-0 xl:h-20" : "relative xl:h-24"} z-40 md:h-20 w-full`}>
         <div className={`w-full md:z-50 ${!isProductPage || navFixed ? "md:bg-pureWhite" : "bg-transparent"} ${(navFixed && !isProductPage) && "md:fixed md:top-0 md:left-0 dark-shadow md:px-7 xl:px-14 nav-bar nav-dark-shadow"}`}>

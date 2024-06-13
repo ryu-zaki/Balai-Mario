@@ -605,6 +605,15 @@ body {
     letter-spacing: .15em;
 }
 
+.feature-blog-imgs {
+    max-width: 25em;
+    margin-inline: auto;
+}
+
+.feature-blog-imgs > * {
+    aspect-ratio: 16 / 9;
+}
+
 .feature-blog-imgs img, 
 .feature-blog-imgs  > div::before{
     border-radius: .5em;
@@ -668,6 +677,56 @@ body {
     box-shadow: none;
     background-color: var(--brown);
     color: var(--pureWhitw);
+}
+
+.categories-loop .categories-wrapper {
+    display: inline-block;
+    animation: carouselLoop 68s infinite linear;
+}
+
+@keyframes carouselLoop {
+
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.categories-loop::before,
+.categories-loop::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    
+    height: 100%;
+    width: 10%;
+    
+    z-index: 2;
+}
+
+.categories-loop::before {
+    left: 0;
+    background: linear-gradient(to left, rgba(0,0,0,0.0), var(--pureWhitw));
+}
+
+.categories-loop::after {
+    right: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.0), var(--pureWhitw));
+}
+
+.categories-wrapper h3 {
+    font-size: .9em;
+    display: inline-block;
+    margin-inline: 1.5em;
+    background-color: var(--pureWhitw);
+    padding: .3em 1.6em;
+    color: var(--lightOrange);
+    border-radius: 99em;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+
 }
 
 @media (min-width: 375px) {
@@ -781,6 +840,10 @@ body {
 
     }
 
+    .categories-wrapper h3 {
+        margin-inline: 2em;
+    }
+
     .product-category-section > section:nth-child(1) {
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         padding: 2.5em;
@@ -815,6 +878,14 @@ body {
     .inv-suggested-recipe > *  p {
         font-size: .8em;
     }
+
+    .feature-blog-imgs {
+        max-width: 100%;
+    }
+
+    /* .feature-blog-imgs > * {
+        aspect-ratio: 0;
+    } */
 
     
 }
@@ -983,6 +1054,11 @@ body {
         max-width: 28em;
     }
 
+    .categories-wrapper h3 {
+        font-size: 1em;
+        padding: .7em 2.3em;
+    }
+
     
     /* Individual Product Page */
     .inv-main-img {
@@ -1041,7 +1117,7 @@ body {
     }
 
     .hero-title {
-        font-size: 3.5em;
+        font-size: 3em;
         padding-right: 1em;
     }
 
@@ -1264,7 +1340,7 @@ body {
 
      /* Individual Product */
      .blog-feature-section h2 {
-        font-size: 4.5em;
+        font-size: 5em;
         padding-right: 4em;
      }
 

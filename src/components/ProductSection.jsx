@@ -37,8 +37,62 @@ const ProductSection = () => {
 
               {/* Marker at the bottom */}
               <span ref={productSecMarkerRef} className='absolute text-center bottom-0 p-3 px-4 z-20 rounded-full left-1/2 bg-lightOrange text-pureWhite -translate-x-1/2 translate-y-1/2 text-xs xxs:text-sm xs:px-6 lg:text-base'>Satisfy your Cravings</span>
+
+              {/* Carousel Loop */}
             </div>
             </div>
+
+            <div className='pt-16 z-10 relative categories-loop bg-pureWhite overflow-hidden whitespace-nowrap pb-6 sm:pb-10'>
+
+                <div className='categories-wrapper title-font'>
+                  <h3>Starter</h3>
+                  <h3>Vegetarian</h3>
+                  <h3>Chicken</h3>
+                  <h3>Mario's Favorite Chicken</h3>
+                  <h3>Beef</h3>
+                  <h3>Fish</h3>
+                  <h3>Seafood</h3>
+                  <h3>Sizzling Options</h3>
+                  <h3>Vegetables</h3>
+                  <h3>Noodles</h3>
+                  <h3>Soup</h3>
+                  <h3>Couple Meal-1</h3>
+                  <h3>Couple Meal-2</h3>
+                  <h3>Couple Meal-3</h3>
+                  <h3>Couple Meal-4</h3>
+                  <h3>Set Meal-A</h3>
+                  <h3>Set Meal-C</h3>
+                  <h3>Mario's Bilao-A</h3>
+                  <h3>Mario's Bilao-B</h3>
+                  <h3>Coffee & Milktea</h3>
+                  <h3>Beers & Buckets</h3>
+                </div>
+
+                <div className='categories-wrapper title-font'>
+                  <h3>Starter</h3>
+                  <h3>Vegetarian</h3>
+                  <h3>Chicken</h3>
+                  <h3>Mario's Favorite Chicken</h3>
+                  <h3>Beef</h3>
+                  <h3>Fish</h3>
+                  <h3>Seafood</h3>
+                  <h3>Sizzling Options</h3>
+                  <h3>Vegetables</h3>
+                  <h3>Noodles</h3>
+                  <h3>Soup</h3>
+                  <h3>Couple Meal-1</h3>
+                  <h3>Couple Meal-2</h3>
+                  <h3>Couple Meal-3</h3>
+                  <h3>Couple Meal-4</h3>
+                  <h3>Set Meal-A</h3>
+                  <h3>Set Meal-C</h3>
+                  <h3>Mario's Bilao-A</h3>
+                  <h3>Mario's Bilao-B</h3>
+                  <h3>Coffee & Milktea</h3>
+                  <h3>Beers & Buckets</h3>
+                </div>
+
+              </div>
 
             <CategorySection />        
         </div>
@@ -120,7 +174,6 @@ const NavigationFilter = ({mobileVer}) => {
 const CategorySection = () => {
   const navigate = useNavigate();
   const [arrowAnim, setArrowAnim] = React.useState(false);
-
   const {allProductsTitleSticky} = useAnimationGSAP();
 
   const handleMenuSelect = () => {

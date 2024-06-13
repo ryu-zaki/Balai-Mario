@@ -30,7 +30,7 @@ const IndividualProduct = () => {
                     <a href='/'>Ingredients</a>
                     <a href='/'>Nutrition</a>
                 </nav>
-                <p className='leading-8 text-sm sm:text-base md:text-sm lg:text-base'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget odio ullamcorper, aliquet risus non, lacinia arcu.Peaxaxllentesque eget odio ullamcorper, aliquet risus non, lacinia arcu.
+                <p className='leading-7 text-sm sm:leading-8 sm:text-base md:text-sm lg:text-base'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget odio ullamcorper, aliquet risus non, lacinia arcu.Peaxaxllentesque eget odio ullamcorper, aliquet risus non, lacinia arcu.
                 </p>
 
                <div className='flex flex-col gap-8 items-center sm:flex-row sm:gap-14 md:flex-col md:items-start md:gap-7 xl:gap-8'>

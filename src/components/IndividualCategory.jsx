@@ -58,13 +58,13 @@ const IndividualCategory = ({category, slideNum}) => {
       <section ref={categorySectionRef} className={`${!!categoryActive && "active"} product-category-section relative pb-10 lg:gap-8 2xl:gap-14`}>
         <section className='text-center flex flex-col items-center gap-2 sm:items-start sm:text-left sm:gap-4'>
         <h2 className='title-font text-xl font-semibold text-darkBrown 2xl:text-3xl'>{category.toUpperCase()}</h2>
-          <div className='w-full flex flex-col items-start sm:mt-5 sm:flex-row sm:justify-between 2xl:flex-col 2xl:items-start 2xl:gap-4 2xl:mt-0'>
+          <div className='w-full flex flex-col items-start xs:items-center sm:mt-0 sm:flex-row sm:justify-between 2xl:flex-col 2xl:items-start 2xl:gap-4 2xl:mt-0'>
             <div className='text-darkBrown space-y-2 xs:w-1/2 2xl:w-full'>
              <p className='text-lightOrange font-semibold'>{filteredRecipes.length} recipes</p>
               <p>Kick off your dining experience with our delectable selection of starters.</p>
             </div>
   
-            <div className='w-full flex flex-col gap-2 items-start xs:w-fit xs:text-nowrap'>
+            <div className='w-full flex flex-col gap-2 mt-3 items-center xs:text-nowrap sm:items-start sm:w-fit sm:mt-0'>
               {/* <span className='text-gray font-semibold 2xl:text-sm'>price range</span> */}
               {
                 isNaN(minPrice) ? (
@@ -112,7 +112,6 @@ const IndividualCategory = ({category, slideNum}) => {
 
     const {recipeName, price, image} = data;
 
-    console.log(typeof price);
     return (
       <section className='bg-pureWhite border featured-product relative flex flex-col gap-2 relative border-gray rounded-2xl w-2/5 p-2 pt-16 items-center xs:gap-3 xs:p-3 xs:pt-16 2xl:pt-24 2xl:pb-8'>
         <div className='z-20 absolute inset-0 cursor-pointer'></div>
