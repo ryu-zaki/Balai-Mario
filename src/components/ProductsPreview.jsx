@@ -2,6 +2,8 @@ import React from 'react';
 import starterCover from '../assets/products/crispy-kangkong.jpg';
 import vegetarianCover from '../assets/products/pinakbet.jpg';
 import chickenCover from '../assets/products/fried-chicken.jpg';
+import { useLocation, useNavigate } from 'react-router';
+import { scroller } from 'react-scroll';
 
 
 const ProductsPreview = () => {
@@ -50,6 +52,19 @@ const ProductsPreview = () => {
 
 const ProductPreview = ({proNum, ImgSrc, title, price, message}) => {
 
+    const navigate = useNavigate();
+
+    const handleNavigate = () => {
+      navigate(`/products/${title.toLowerCase()}`);
+
+      setTimeout(() => {
+
+        scroller.scrollTo("available-recipe");
+
+      }, 0);
+      
+    }
+
     return (
         <section className='relative text-pureWhite product-preview overflow-hidden rounded-xl flex justify-center'>
 
@@ -72,7 +87,7 @@ const ProductPreview = ({proNum, ImgSrc, title, price, message}) => {
             {/* Information */}
             <div className='info-box absolute top-full text-center translate-y-full flex flex-col gap-3 px-5'>
               <p className='text-sm lg:text-base xl:leading-7'>{message}</p>
-              <a className='cursor-pointer border-pureWhite border p-2 px-6 rounded-lg self-center font-semibold'>Take a Look</a>    
+              <button onClick={handleNavigate} className='cursor-pointer border-pureWhite border p-2 px-6 rounded-lg self-center font-semibold'>Take a Look</button>    
             </div>
         </section>
     )

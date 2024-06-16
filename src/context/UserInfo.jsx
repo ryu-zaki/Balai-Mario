@@ -4,7 +4,7 @@ const ComponentContext = React.createContext(null);
 
 const UserInfo = ({children}) => {
 
-    const [isLogin, setIsLogin] = React.useState(false);
+    const [isLogin, setIsLogin] = React.useState(true);
 
     return (
 

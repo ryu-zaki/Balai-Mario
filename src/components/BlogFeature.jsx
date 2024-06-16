@@ -26,7 +26,7 @@ const BlogFeature = () => {
                 
 
                 <div className='relative bg-lightOrange pt-16 p-5 text-pureWhite text-xs rounded-xl xxs:text-base xxs:p-7 xxs:pt-16 sm:pt-10 md:flex md:flex-col md:justify-end md:items-start lg:pt-16 lg:text-lg lg:p-9 lg:px-12 '>
-                    <div className='text-xs left-4 right-4 p-5 px-7 bg-pureWhite absolute top-0 -translate-y-3/4 border border-lightOrange rounded-xl text-darkBrown xxs:left-auto xxs:w-2/3 xs:text-sm sm:w-52 lg:w-72 lg:-translate-y-1/2 lg:text-base lg:p-7 2xl:text-base 2xl:w-80 2xl:pl-14 2xl:right-7 2xl:-translate-y-3/4'>
+                    <div className='text-xs left-4 right-4 p-5 px-7 bg-pureWhite absolute top-0 -translate-y-1/2 border border-lightOrange rounded-xl text-darkBrown xxs:left-auto xxs:w-2/3 xs:text-sm sm:-translate-y-3/4 sm:w-72 md:w-52 lg:w-72 lg:-translate-y-1/2 lg:text-base lg:p-7 2xl:text-base 2xl:w-80 2xl:pl-14 2xl:right-7 2xl:-translate-y-3/4'>
                         <img className='w-4 absolute top-2 left-2 2xl:top-3 2xl:left-3 2xl:w-6' src={quoteSign} alt='' />
                         <p className='2xl:leading-8'>Pellentesque eget odio ullamcorper, aliquet risus non
                         </p>

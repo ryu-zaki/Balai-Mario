@@ -58,7 +58,7 @@ import steamedLapuLapu from '../assets/products/steamed lapu-lapu.jpg';
 import friedTilapia from '../assets/products/fried tilapia.jpg';
 import friedLapuLapu from '../assets/products/fried lapu-lapu.jpg';
 
-export const availCategories = ["starter", "vegetarian", "chicken", "mario's favorite chicken", "beef", "fish"];
+export const availCategories = ["starter", "vegetarian", "chicken", "mario's favorite chicken", "beef", "fish", "seafood", "sizzling options", "vegetables", "noodles", "soup", "couple meal-1", "couple meal-2", "couple meal-3", "couple meal-4", "set meal-A", "set meal-A", "set meal-B", "set meal-C", "mario's bilao-A", "mario's bilao-B", "coffee & milktea", "beers & buckets"];
 
 export const availRecipes = [
     /* Starter */
@@ -67,34 +67,41 @@ export const availRecipes = [
       price: 380,
       image: calamares,
       category: "starter",
+      limit: '3-4 PAX',
+      quantity: 1,
+      hearts: 0,
     },
     {
       recipeName: 'fried tawilis',
       price: 385,
       image: friedTawilis,
       category: "starter",
-      limit: '3-5 PAX'
+      limit: '3-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'onion rings',
       price: 270,
       image: onionRings,
       category: "starter",
-      limit: '3-4 PAX'
+      limit: '3-4 PAX',
+      hearts: 0
     },
     {
       recipeName: 'crispy kangkong',
       price: 225,
       image: crispyKangkong,
       category: "starter",
-      limit: '3-5 PAX'
+      limit: '3-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'crunchy mushroom',
       price: 270,
       image: crunchyMushoom,
       category: "starter",
-      limit: '3-5 PAX'
+      limit: '3-5 PAX',
+      hearts: 0
     },
 
     {
@@ -102,7 +109,8 @@ export const availRecipes = [
       price: 460,
       image: nilasingNaHipon,
       category: "starter",
-      limit: '4-5 PAX'
+      limit: '4-5 PAX',
+      hearts: 0
     },
     
     {
@@ -110,7 +118,8 @@ export const availRecipes = [
       price: 480,
       image: camaronRebosado,
       category: "starter",
-      limit: '3-4 PAX'
+      limit: '3-4 PAX',
+      hearts: 0
     },
     
     {
@@ -118,14 +127,16 @@ export const availRecipes = [
       price: 290,
       image: beefShanghai,
       category: "starter",
-      limit: '3-4 PAX'
+      limit: '3-4 PAX',
+      hearts: 0
     },
     {
       recipeName: 'french fries',
       price: 290,
       image: frenchFries,
       category: "starter",
-      limit: '3-4 PAX'
+      limit: '3-4 PAX',
+      hearts: 0
     },
 
     /* Vegetarian */
@@ -134,21 +145,24 @@ export const availRecipes = [
       price: 395,
       image: tofuCurry,
       category: "vegetarian",
-      limit: '3-5 PAX'
+      limit: '3-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'sizzling tofu',
       price: 395,
       image: sizzlingTofu,
       category: "vegetarian",
-      limit: '3-4 PAX'
+      limit: '3-4 PAX',
+      hearts: 0
     },
     {
       recipeName: 'tofu in tausi',
       price: 395,
       image: tofuInTausi,
       category: "vegetarian",
-      limit: '3-5 PAX'
+      limit: '3-5 PAX',
+      hearts: 0
     },
     
     {
@@ -156,28 +170,32 @@ export const availRecipes = [
       price: 395,
       image: sizzlingVegelonaSteak,
       category: "vegetarian",
-      limit: '3-5 PAX'
+      limit: '3-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'vegetarian tocino',
       price: 380,
       image: vegetarianTocino,
       category: "vegetarian",
-      limit: '3-5 PAX'
+      limit: '3-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'vegemeat caldereta',
       price: 395,
       image: vegemeatCaldereta,
       category: "vegetarian",
-      limit: '3-5 PAX'
+      limit: '3-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'vegemeat in mushroom sauce',
       price: 375,
       image: vegemeatInMushroomSauce,
       category: "vegetarian",
-      limit: '3-5 PAX'
+      limit: '3-5 PAX',
+      hearts: 0
     },
 
     /* Chicken */
@@ -186,48 +204,54 @@ export const availRecipes = [
       price: 520,
       image: chickenTinola,
       category: "chicken",
-      limit: '4-5 PAX'
+      limit: '4-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'chicken adobo',
       price: 475,
       image: chickenAdobo,
       category: "chicken",
-      limit: '4-5 PAX'
+      limit: '4-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'chicken curry',
       price: 550,
       image: chickenCurry,
       category: "chicken",
-      limit: '4-5 PAX'
+      limit: '4-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'sinigang na manok',
       price: 520,
       image: sinigangNaManok,
       category: "chicken",
-      limit: '4-5 PAX'
+      limit: '4-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'bicol express chicken',
       price: 550,
       image: bicolExpressChicken,
       category: "chicken",
-      limit: '4-5 PAX'
+      limit: '4-5 PAX',
+      hearts: 0
     },
     {
       recipeName: 'pineapple chicken',
       price: 550,
       image: pineappleChikcen,
       category: "chicken",
-      limit: '4-5 PAX'
+      limit: '4-5 PAX',
+      hearts: 0
     },
 
 
     /* Mario's Favorite Chicken */
     {
-      recipeName: 'Fried Chicken',
+      recipeName: 'fried chicken',
       price: {
         whole: 680,
         half: 350
@@ -237,10 +261,11 @@ export const availRecipes = [
       limit: {
         whole: "6-5 PAX",
         half: "2-3 PAX"
-      }
+      },
+      hearts: 0
     },
     {
-      recipeName: 'Garlic Chicken',
+      recipeName: 'garlic chicken',
       price: {
         whole: 750,
         half: 385
@@ -250,7 +275,8 @@ export const availRecipes = [
       limit: {
         whole: "7-8 PAX",
         half: "3-4 PAX"
-      }
+      },
+      hearts: 0
     },
 
     {
@@ -264,7 +290,8 @@ export const availRecipes = [
       limit: {
         whole: "7-8 PAX",
         half: "3-4 PAX"
-      }
+      },
+      hearts: 0
   },
     {
         recipeName: 'buttered garlic chicken',
@@ -277,7 +304,8 @@ export const availRecipes = [
         limit: {
           whole: "7-8 PAX",
           half: "3-4 PAX"
-        }
+        },
+        hearts: 0
     },
     
     {
@@ -291,7 +319,8 @@ export const availRecipes = [
         limit: {
           whole: "7-8 PAX",
           half: "3-4 PAX"
-        }
+        },
+        hearts: 0
     },
 
     {
@@ -305,7 +334,8 @@ export const availRecipes = [
         limit: {
           whole: "7-8 PAX",
           half: "3-4 PAX"
-        }
+        },
+        hearts: 0
     },
 
     /* Beef */
@@ -314,70 +344,80 @@ export const availRecipes = [
       price: 695,
       image: bulaloSteak,
       category: "beef",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'bulalo pares',
       price: 695,
       image: bulaloPares,
       category: "beef",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'beef caldereta',
       price: 560,
       image: beefCaldereta,
       category: "beef",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'bulalo batangas',
       price: 695,
       image: bulaloBatangas,
       category: "beef",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'bulalo sinigang',
       price: 695,
       image: bulaloSinigang,
       category: "beef",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'beef broccoli',
       price: 595,
       image: beefBroccoli,
       category: "beef",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'beef steak tagalog',
       price: 495,
       image: beefSteakTagalog,
       category: "beef",
-      limit: "3-4 PAX"
+      limit: "3-4 PAX",
+      hearts: 0
     },
     {
       recipeName: 'bulalo kare-kare',
       price: 750,
       image: bulaloKareKare,
       category: "beef",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'beef salpicao',
       price: 550,
       image: beefSalpicao,
       category: "beef",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'beef ampalaya',
       price: 540,
       image: beefAmpalaya,
       category: "beef",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
 
     /* Fish */
@@ -386,56 +426,64 @@ export const availRecipes = [
       price: 495,
       image: sinigangNaBangus,
       category: "fish",
-      limit: "3-4 PAX"
+      limit: "3-4 PAX",
+      hearts: 0
     },
     {
       recipeName: 'baked bangus',
       price: 650,
       image: bakedBangus,
       category: "fish",
-      limit: "3-4 PAX"
+      limit: "3-4 PAX",
+      hearts: 0
     },
     {
       recipeName: 'bangus ala pobre',
       price: 550,
       image: bangusAlaPobre,
       category: "fish",
-      limit: "3-5 PAX"
+      limit: "3-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'bangus belly kilawin',
       price: 395,
       image: bangusBellyKilawin,
       category: "fish",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'pinaputok na tilapia',
       price: 450,
       image: pinaputoNaTilapia,
       category: "fish",
-      limit: "3-4 PAX"
+      limit: "3-4 PAX",
+      hearts: 0
     },
     {
       recipeName: 'steamed lapu-lapu',
       price: 1250,
       image: steamedLapuLapu,
       category: "fish",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     {
       recipeName: 'fried tilapia w/ mango salsa',
       price: 675,
       image: friedTilapia,
       category: "fish",
-      limit: "3-4 PAX"
+      limit: "3-4 PAX",
+      hearts: 0
     },
     {
       recipeName: 'fried lapu-lapu w/ mango salsa',
       price: 1350,
       image: friedLapuLapu,
       category: "fish",
-      limit: "4-5 PAX"
+      limit: "4-5 PAX",
+      hearts: 0
     },
     
 

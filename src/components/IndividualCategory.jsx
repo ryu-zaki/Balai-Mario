@@ -109,12 +109,19 @@ const IndividualCategory = ({category, slideNum}) => {
   }
 
   const FeaturedProduct = ({data}) => {
+ 
+    const {recipes} = useAvailableRecipes();
+    const {recipeName, price, image, category} = data;
+     
+    const navigate = useNavigate();
 
-    const {recipeName, price, image} = data;
+    const handleNavigate = ({target}) => {
+      navigate(`${category}/${target.id}`);
+    }
 
     return (
       <section className='bg-pureWhite border featured-product relative flex flex-col gap-2 relative border-gray rounded-2xl w-2/5 p-2 pt-16 items-center xs:gap-3 xs:p-3 xs:pt-16 2xl:pt-24 2xl:pb-8'>
-        <div className='z-20 absolute inset-0 cursor-pointer'></div>
+        <div id={recipeName} onClick={handleNavigate} className='z-20 absolute inset-0 cursor-pointer'></div>
         <img className='aspect-1 object-cover absolute select-none top-0 -translate-y-1/2 w-4/5 rounded-full max-w-24 2xl:max-w-36' draggable={false} src={image} alt='' />
         
         <h3 className='flex justify-center mb-4 items-center z-10 font-semibold overflow-hidden relative text-center rounded-full dark-shadow p-2 px-3 text-xs text-lightOrange xs:px-4 sm:px-6 lg:px-3 sm:py-3 2xl:py-4 2xl:px-8'>{recipeName.toUpperCase()}</h3>

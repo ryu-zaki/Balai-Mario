@@ -12,6 +12,7 @@ const AnimationGSAP = ({children}) => {
 
     const productSecMarkerRef = useRef(null);
     const {pathname} = useLocation();
+    const bgTextRef = React.useRef(null);
     const footerRef = useRef(null);
     
 
@@ -35,7 +36,7 @@ const AnimationGSAP = ({children}) => {
 
     return(
         <ComponentContext.Provider 
-        value={{productSecMarkerRef, footerRef}}
+        value={{productSecMarkerRef, footerRef, bgTextRef}}
         >
 
           {children}
