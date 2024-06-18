@@ -55,7 +55,7 @@ const AvailableRecipes = ({children}) => {
               const prevQuan = arr[i].quantity;
 
                 arr[i].quantity = addOrSub >= 0 ? 
-                prevQuan + 1 : prevQuan - 1;
+                prevQuan + 1 : prevQuan <= 1 ? prevQuan : prevQuan - 1;
               
               
               break;

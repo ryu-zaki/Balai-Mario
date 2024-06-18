@@ -108,10 +108,10 @@ const IndividualProduct = () => {
 
               <div className='flex gap-7 flex-col md:flex-row'>
                <div className='flex gap-5'>
-                    <div className='flex w-28 flex justify-between  text-lightOrange rounded-full py-2 px-5 font-semibold bg-lighterOrange sm:w-32 sm:text-lg md:w-28 md:text-sm lg:w-32 lg:text-lg'>
-                        <span onClick={handleQuantity} id="add" className='select-none cursor-pointer'>+</span>
+                    <div className='flex w-28 flex justify-between  text-lightOrange rounded-full py-2 font-semibold bg-lighterOrange sm:w-32 sm:text-lg md:w-28 md:text-sm lg:w-32 lg:text-lg'>
+                        <span onClick={handleQuantity} id="add" className='select-none cursor-pointer pl-5'>+</span>
                         <span>{invInfo.quantity}</span>
-                        <span onClick={handleQuantity} className='select-none cursor-pointer'>-</span>
+                        <span onClick={handleQuantity} className='pr-5 select-none cursor-pointer'>-</span>
                     </div>
 
                     <div className='text-lightOrange flex gap-2 items-center sm:text-lg md:text-sm lg:text-lg'>

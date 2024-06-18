@@ -17,13 +17,13 @@ import CategoryProducts, { divideArr } from './components/CategoryProducts';
 import IndividualCategory from './components/IndividualCategory';
 import { useAvailableRecipes } from './context/AvailableRecipes';
 import { Element, Link, scroller } from 'react-scroll';
+import CheckoutPage from './components/CheckoutPage';
 
 function App() {
   const {categories} = useAvailableRecipes();
   const {pathname} = useLocation();
   const [controlsIndex, setControlsIndex] = React.useState(0);
   const [slideNum, setSlideNum] = React.useState(1);
-  const resetterBtnRef = useRef(null);
   const [individualCategories, setIndividualCategories] = React.useState([]);
 
   React.useEffect(() => {
@@ -127,9 +127,7 @@ function App() {
         
         <Route path='/products/:category/:productId' element={
           <div>
-            <div className='px-7 xl:px-14'>
             <NavBar />
-            </div>
 
             <IndividualProduct />
           </div>} />
@@ -161,11 +159,17 @@ function App() {
             
         />
 
-      </Routes>
-      <Footer />
-       
-         
+       <Route 
+         path='/checkout'
+         element={<div className='min-h-screen flex justify-center items-center'><CheckoutPage /></div>}
+       />
 
+      </Routes>
+
+      {
+        pathname !== "/checkout" && <Footer />
+      }
+    
          {/* <ProductSection /> */}
         
        
