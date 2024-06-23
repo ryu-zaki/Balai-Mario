@@ -983,6 +983,10 @@ input[type="radio"]:checked ~ .custom-radio::before {
    width: var(--receiptCardWidth);
 }
 
+.note-modal {
+    border-radius: 1.3em;
+}
+
 .note-modal > div::before {
     content: '';
     position: absolute;

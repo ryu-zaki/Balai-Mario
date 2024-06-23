@@ -284,6 +284,7 @@ const NavBar = () => {
             
 
             <MobileButtons 
+              setViewMore={setViewMore}
               setCartVisible={setCartVisible} 
               style={"relative gap-5"} 
               isProductPage={isProductPage} 

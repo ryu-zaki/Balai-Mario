@@ -332,9 +332,9 @@ const PaymentMethod = () => {
                     </div>
 
 
-                    <div className='flex flex-col gap-2 text-xs bg-lighterOrange text-lightOrange p-3 rounded-lg xxs:text-sm lg:text-lg lg:p-4 lg:px-6'>
+                   {/*  <div className='flex flex-col gap-2 text-xs bg-lighterOrange text-lightOrange p-3 rounded-lg xxs:text-sm lg:text-lg lg:p-4 lg:px-6'>
                         <h3>Total: <span className='font-semibold'>&#8369;500.00</span></h3>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className='flex gap-3 text-sm items-center mt-10 bg-lighterOrange p-5 rounded-xl text-lightOrange xs:text-base xs:p-7 lg:gap-5 lg:p-10 lg:text-lg'>

@@ -32,7 +32,7 @@ const ReceiptPage = ({setIsFinish}) => {
                         <p>Thank you for your order, your order will be process. You will receive an email confirmation shortly. Thank you!</p>
                     </div>
 
-                    <h2 className='font-semibold lg:text-lg'>Date of Order: <span className='text-lightOrange'>June 22, 2024</span></h2>
+                    <h2 className='font-semibold lg:text-lg'>Date of Order: <span className='text-lightOrange'>{new Date().toDateString()}</span></h2>
 
                     <button onClick={handleContinue} className='self-center bg-lightOrange text-pureWhite w-1/2 py-2 rounded-md lg:py-3 lg:w-4/5'>CONTINUE</button>
 
