@@ -4,10 +4,12 @@ import crossIcon from '../assets/materials/cross-icon.png';
 import chevronLeft from '../assets/materials/chevron-left.png';
 import deleteIcon from '../assets/materials/delete-icon.png';
 import { useNavigate } from 'react-router';
+import { useAvailableRecipes } from '../context/AvailableRecipes';
 
 const CartContents = ({allCartDishVisible, setAllCartDishVisible}) => {
 
     const navigate = useNavigate();
+    const {recipes} = useAvailableRecipes();
 
     return (
         <>
@@ -16,17 +18,18 @@ const CartContents = ({allCartDishVisible, setAllCartDishVisible}) => {
           <div className={`${!allCartDishVisible && "scale-0"} all-cart-dish p-5 transition-all duration-1000 rounded-xl bg-pureWhite w-11/12 z-40 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 xs:p-7 xs:w-96 md:px-10`}>
             <div className='flex justify-between items-center'>
             <h2 className='text-2xl font-semibold xs:text-3xl'>Your Dish</h2>
-            <p className='text-sm font-semibold text-lightOrange'>(20 recipes)</p>
+            <p className='text-sm font-semibold text-lightOrange'>(8 recipes)</p>
 
             </div>
             
 
             <div className='my-5 overflow-auto dishes-container md:pr-10'>
-                    <IndividualDish />
-                    <IndividualDish />
-                    <IndividualDish />
-                    <IndividualDish />
-                    <IndividualDish />
+                    
+                   {
+                     recipes
+                     .filter((_, index) => index < 8)
+                     .map((data, index) => <IndividualDish key={index} data={data} />)
+                   }
             </div>
 
 <div className="md:flex justify-between w-full">
@@ -39,7 +42,13 @@ const CartContents = ({allCartDishVisible, setAllCartDishVisible}) => {
 
                 <div className='flex gap-2 items-start font-semibold'>
                     <h3>Total</h3>
-                    <span className='text-lg text-lightOrange md:text-xl'>&#8369;1120.00</span>
+                    <span className='text-lg text-lightOrange md:text-xl'>&#8369;{
+                         recipes
+                         .filter((_, index) => index < 8)
+                         .map(({price}) => price)
+                         .reduce((total, price) => total + price)
+                         .toFixed(2)
+                        }</span>
                 </div>
             </div>
 
@@ -52,16 +61,18 @@ const CartContents = ({allCartDishVisible, setAllCartDishVisible}) => {
     )
 }
 
-const IndividualDish = () => {
+const IndividualDish = ({data}) => {
+
+    const {recipeName, price, category, image} = data;
 
     return (
         <div className='flex gap-4 justify-between inv-cart-dish items-center text-xs my-4 w-full xxs:text-sm xs:gap-6 md:my-6 md:gap-10'>
             <div className='w-full flex items-start gap-2 xxs:gap-4 md:gap-7'>
-              <img draggable={false} className='object-cover w-14 aspect-1 rounded-lg xs:w-16 md:w-20' src={sampleProduct} alt="" />
+              <img draggable={false} className='object-cover w-14 aspect-1 rounded-lg xs:w-16 md:w-20' src={image} alt="" />
               <div className='w-full'>
-                <span className='text-gray font-bold'>STARTER</span>
-                <h3 className='font-bold w-11/12 max-w-32 truncate xs:text-base md:text-xl'>Fried Tawilis</h3>
-                <p className='text-lightOrange font-bold'>&#8369;200.00</p>
+                <span className='text-gray font-bold uppercase'>{category}</span>
+                <h3 className='font-bold w-11/12 capitalize max-w-32 md:max-w-60 truncate xs:text-base md:text-xl'>{recipeName}</h3>
+                <p className='text-lightOrange font-bold'>&#8369;{price.toFixed(2)}</p>
               </div>
             </div>
 

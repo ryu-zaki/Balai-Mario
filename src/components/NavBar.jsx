@@ -32,6 +32,7 @@ import { useLocation, useNavigate, useParams } from "react-router";
 import { scroller } from "react-scroll";
 import { useUserinfo } from "../context/UserInfo";
 import CartContents from "./CartContents";
+import { useAvailableRecipes } from "../context/AvailableRecipes";
 
 
 const CreatemMoreNav = (navName, icon, modal) => {
@@ -76,7 +77,7 @@ const NavBar = () => {
 
     React.useEffect(() => {
 
-        setIsProductPage(pathname === "/products" || !!(params.category) && !(params.productId));
+        setIsProductPage((pathname === "/products") || (!!(params.category) && !(params.productId)));
     
     }, [pathname])
 
@@ -327,7 +328,7 @@ const CartIcon = ({display, setCartVisible, isProductPage, setViewMore}) => {
     return (
         <div className={`${display} w-6 relative cart-icon 2xl:w-7`}>
              <div onClick={handleOpen} className="absolute inset-0 cursor-pointer z-10"></div>
-             <span className="absolute rounded-full -top-1 -right-3  bg-lightOrange text-pureWhite px-2">1</span>
+             <span className="absolute rounded-full -top-1 -right-3  bg-lightOrange text-pureWhite px-2">8</span>
               <img className="w-full" src={isProductPage ? cartLight : cartDark} alt="" />
         </div>
     )
@@ -335,24 +336,28 @@ const CartIcon = ({display, setCartVisible, isProductPage, setViewMore}) => {
 
 const CartModal = ({cartVisible, setCartVisible, setAllCartDishVisible}) => {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {recipes} = useAvailableRecipes();
 
     const handleOpeAll = () => {
         setAllCartDishVisible(true);
         setCartVisible(false);
     }
 
-    const DishBox = () => {
+    const DishBox = ({data}) => {
+
+        const {recipeName, image, price, category} = data;
+
         return (
             <div className={`flex justify-between cart-dish-box items-center border-b border-lightOrange pb-3 gap-5`}>
                 <div className="flex items-center gap-3">
-                    <img className="w-14 aspect-1 rounded-xl object-cover" draggable={false} src={samplePro} alt="" />
+                    <img className="w-14 aspect-1 rounded-xl object-cover" draggable={false} src={image} alt="" />
                     
                     <div className="text-darkBrown font-semibold">
-                        <span className="text-gray category text-xs block">Starter</span>
-                        <h3 className="text-sm xs:text-base">Special bulalo</h3>
+                        <span className="text-gray category text-xs block">{category}</span>
+                        <h3 className="text-sm xs:text-base">{recipeName}</h3>
                         <div className="flex gap-2 mt-1">
-                          <p className="text-lightOrange text-xs xs:text-sm">$200.00</p>
+                          <p className="text-lightOrange text-xs xs:text-sm">&#8369;{price}</p>
                           <span className="text-darkBrown font-bold text-xs xs:text-sm">x2</span>              
                         </div>
                     </div>
@@ -365,16 +370,23 @@ const CartModal = ({cartVisible, setCartVisible, setAllCartDishVisible}) => {
     }
 
     return (
-        <div className={`${!cartVisible && "scale-0"} transition-all duration-700 p-6 absolute ease-in-out origin-top-right rounded-xl bg-ash w-11/12 dark-shadow flex flex-col -bottom-3 translate-y-full translate-x-1/2 right-1/2 xs:w-96 xs:p-8 xs:translate-x-0 xs:right-5 xs:-bottom-2 md:right-24 xl:right-32`}>
+        <div className={`${!cartVisible && "scale-0 origin-top-right"} transition-all duration-1000 p-6 absolute ease-in-out rounded-xl bg-ash w-11/12 dark-shadow flex flex-col -bottom-3 translate-y-full translate-x-1/2 right-1/2 xs:w-96 xs:p-8 xs:translate-x-0 xs:right-5 xs:-bottom-2 md:right-24 xl:right-32`}>
           <img onClick={() => setCartVisible(false)} draggable={false} className="cursor-pointer w-5 absolute top-3 right-3 xs:top-5 xs:right-5 xl:w-6" src={crossIcon} alt="" />
           <h2 className="text-2xl text-darkBrown font-semibold xs:text-3xl">Your Dish</h2>
           <div className="flex flex-col gap-4 my-5">
-             <DishBox />
-             <DishBox />
-             <DishBox />
+             {
+               recipes
+               .filter((_, index) => index < 3)
+               .map((data, index) => {
+                   return <DishBox 
+                     data={data}
+                     key={index}
+                  />
+               })
+             }
           </div>
           <div className="flex text-darkBrown justify-between">
-          <span className="text-sm"><span className="text-lightOrange font-bold">4</span> other recipes</span>
+          <span className="text-sm"><span className="text-lightOrange font-bold">5</span> other recipes</span>
           <span onClick={handleOpeAll} className="cursor-pointer self-end text-sm underline text-lightOrange">View All</span>
           </div>
           <button onClick={() => navigate('/checkout')} className="block mt-3 text-sm text-pureWhite bg-lightOrange w-full text-center py-3 rounded-lg xs:py-4">CHECKOUT</button>
@@ -387,7 +399,7 @@ const UserConfigModal = ({viewMore}) => {
 
 
     return (
-        <div className={`${!viewMore && "scale-0 origin-top-right"} transition-all duration-700 hidden user-config-modal rounded-xl absolute right-6 p-8 dark-shadow -bottom-2 bg-ash translate-y-full w-80 md:block xl:right-14`}>
+        <div className={`${!viewMore && "scale-0 origin-top-right"} text-darkBrown transition-all duration-700 hidden user-config-modal rounded-xl absolute right-6 p-8 dark-shadow -bottom-2 bg-ash translate-y-full w-80 md:block xl:right-14`}>
            <div className="flex items-center gap-5 border-b border-darkBrown pb-5">
             <div className="user-icon aspect-1 w-10 relative">
                <img className="w-full h-full rounded-full" src={userIcon} alt="" />

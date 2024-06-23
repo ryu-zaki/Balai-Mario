@@ -17,7 +17,11 @@ import CategoryProducts, { divideArr } from './components/CategoryProducts';
 import IndividualCategory from './components/IndividualCategory';
 import { useAvailableRecipes } from './context/AvailableRecipes';
 import { Element, Link, scroller } from 'react-scroll';
+import chevronLightRight from './assets/materials/chevron-light-right.png';
+import chevronLightLeft from './assets/materials/chevron-light-left.png';
 import CheckoutPage from './components/CheckoutPage';
+import ReceiptPage from './components/ReceiptPage';
+import NoteModal from './components/NoteModal';
 
 function App() {
   const {categories} = useAvailableRecipes();
@@ -25,6 +29,15 @@ function App() {
   const [controlsIndex, setControlsIndex] = React.useState(0);
   const [slideNum, setSlideNum] = React.useState(1);
   const [individualCategories, setIndividualCategories] = React.useState([]);
+  
+  const aboutUsRef = useRef(null);
+  const previewRef = useRef(null);
+  const servicesRef = useRef(null);
+
+  const [aboutUsSecActive, setAboutUsSecActive] = React.useState(false);
+  const [previewSecActive, setPreviewSecActive] = React.useState(false);
+  const [servicesSecActive, setServicesActive] = React.useState(false);
+  const [isFinish, setIsFinish] = React.useState(false);
 
   React.useEffect(() => {
     const filteredFoods = categories
@@ -59,9 +72,36 @@ function App() {
     setControlsIndex(0);
 
   }, [pathname])
+
+  const setIntersectionObserver = (element, setState, threshold = .5) => {
+    
+    if (!element) return;
+
+    const observer = new IntersectionObserver((entries) => {
+
+      entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setState(true);
+          } 
+      })
+
+    }, {threshold});
+
+    observer.observe(element);
+
+  }
+
+  React.useEffect(() => {
+
+    setIntersectionObserver(aboutUsRef.current, setAboutUsSecActive);
+    setIntersectionObserver(previewRef.current, setPreviewSecActive);
+    setIntersectionObserver(servicesRef.current, setServicesActive, .1);
+
+  }, [aboutUsRef, servicesRef, aboutUsRef, pathname]);
+
   return (
     <div className='w-full'>
-      
+      <NoteModal />
       <Routes>
         <Route path='/' element={
           <>
@@ -74,15 +114,18 @@ function App() {
                  </Element>
                  
                  <Element className='w-full' name='about us'>
-                   <AboutUs />
+                   <AboutUs aboutUsSecActive={aboutUsSecActive} aboutUsRef={aboutUsRef} />
                  </Element>
                  
                  <Element className='w-full' name="products">
-                   <ProductsPreview />
+                   <ProductsPreview previewSecActive={previewSecActive} previewRef={previewRef} />
                  </Element>
                  
                  <Element className='w-full' name='services'>
-                   <ServicesSection />
+                   <ServicesSection
+                     servicesRef={servicesRef}
+                     servicesSecActive={servicesSecActive}
+                   />
                  </Element>
                  
                  <Testimonials />
@@ -100,18 +143,23 @@ function App() {
         <Route path='/products' element={<ProductSection />} >
 
           <Route index element={
-           <div className='w-11/12'>
-             <div className='w-full individual-category-container mx-auto mt-10 text-sm text-center flex flex-col items-center gap-10 xs:text-left xs:mt-16 lg:mt-20 lg:gap-28 2xl:text-base 2xl:mt-28'>
+           <div className='w-11/12 category-main-container'>
+          
+             <SliderController 
+               arrLength={individualCategories.length} 
+               setState={setControlsIndex}
+               currentSlide={controlsIndex} 
+               style={"justify-between xs:justify-center lg:justify-end my-14"}
+              />
+             <div className='w-full individual-category-container mx-auto  text-sm text-center flex flex-col items-center gap-10 xs:text-left  lg:gap-28 2xl:text-base  mt-10'>
               {individualCategories[controlsIndex]}
              </div>
-             <div className='category-controls flex text-sm flex-col gap-5 mt-10 items-center lg:flex-row lg:justify-between lg:mx-auto lg:text-base'>
-              <div className='flex gap-3 text-pureWhite'>
-                <button onClick={handlePrevSlide} className={`${!controlsIndex ? "cursor-not-allowed bg-lightOverlay" : "bg-lightOrange"} transition-all duration-500 py-3 px-8 rounded-xl`}>Previous</button>
-                <button onClick={handleNextSlide} className={`${controlsIndex + 1 >= categories.length ? "cursor-not-allowed bg-lightOverlay" : "bg-lightOrange"} transition-all duration-500 py-3 px-8 rounded-xl`}>Next</button>
-              </div>
-
-              <p className='flex font-bold gap-3 text-gray'><span className=' text-lightOrange'>{controlsIndex + 1}</span>of<span className='text-lightOrange'>{individualCategories.length}</span></p>
-             </div>
+             <SliderController 
+               arrLength={individualCategories.length} 
+               setState={setControlsIndex}
+               currentSlide={controlsIndex} 
+               style={"justify-between xs:justify-center lg:justify-start mt-20"}
+              />
            </div>
             } />
 
@@ -129,7 +177,7 @@ function App() {
           <div>
             <NavBar />
 
-            <IndividualProduct />
+            <IndividualProduct setIntersectionObserver={setIntersectionObserver}/>
           </div>} />
 
         <Route path='/login' element={
@@ -161,7 +209,11 @@ function App() {
 
        <Route 
          path='/checkout'
-         element={<div className='min-h-screen flex justify-center items-center'><CheckoutPage /></div>}
+         element={
+         isFinish ? (
+          <ReceiptPage setIsFinish={setIsFinish} />
+         ) : <div className='min-h-screen flex justify-center items-center'><CheckoutPage setIsFinish={setIsFinish} /></div>
+         }
        />
 
       </Routes>
@@ -176,6 +228,53 @@ function App() {
        
     </div>
   );
+}
+
+export const SliderController = ({currentSlide, setState, arrLength, style}) => {
+  
+  const {pathname} = useLocation();
+  const handleControl = ({target}) => {
+
+    if (target.id === "add") {
+      setState(prev => {
+        if (prev + 1 >= arrLength) return prev;
+
+        scroller.scrollTo('available-recipe');
+        return prev + 1 
+      
+      });
+    } else {
+      setState(prev => {
+        if (!prev) return 0;
+        
+        scroller.scrollTo('available-recipe');
+        return prev - 1 
+      
+      });
+    }
+    
+  }
+
+
+
+  return (
+   <div className={`${style} text-darkBrown flex items-center w-full px-10 xs:gap-7 lg:gap-8`}>
+    <div className={`${!!currentSlide ? "bg-lightOrange" : "bg-lightGray"} p-2 rounded-full relative lg:p-3`}>
+      
+    <div id="sub" onClick={handleControl} className={`absolute inset-0 z-20 ${!!currentSlide ? 'cursor-pointer' : "cursor-not-allowed"}`}></div>
+
+    <img draggable={false} className='w-4 select-none' src={chevronLightLeft} alt='' />
+    </div>
+
+    <p className='flex gap-3'><span className='font-bold'>{currentSlide + 1}</span> of <span className='font-bold'>{arrLength}</span></p>
+
+    <div className={`${currentSlide + 1 === arrLength ? "bg-lightGray" : "bg-lightOrange"} p-2 rounded-full relative lg:p-3`}>
+    <div id="add" onClick={handleControl} className={`absolute inset-0 z-20 ${currentSlide + 1 === arrLength ? "cursor-not-allowed" : 'cursor-pointer'}`}></div>
+    <img draggable={false} className='w-4 select-none' src={chevronLightRight} alt='' />
+    </div>
+    
+   </div>
+  )
 }
 
 export default App;

@@ -55,7 +55,7 @@ const IndividualCategory = ({category, slideNum}) => {
     });
 
     return (
-      <section ref={categorySectionRef} className={`${!!categoryActive && "active"} product-category-section relative pb-10 lg:gap-8 2xl:gap-14`}>
+      <section ref={categorySectionRef} className={`${!!categoryActive && "active"} product-category-section w-full relative pb-10 lg:gap-8 2xl:gap-14`}>
         <section className='text-center flex flex-col items-center gap-2 sm:items-start sm:text-left sm:gap-4'>
         <h2 className='title-font text-xl font-semibold text-darkBrown 2xl:text-3xl'>{category.toUpperCase()}</h2>
           <div className='w-full flex flex-col items-start xs:items-center sm:mt-0 sm:flex-row sm:justify-between 2xl:flex-col 2xl:items-start 2xl:gap-4 2xl:mt-0'>
@@ -95,7 +95,10 @@ const IndividualCategory = ({category, slideNum}) => {
             </div>
           </section>
   
-          <section className='flex flex-col items-center w-full mt-10 xs:mt-16 lg:mt-0 lg:items-start 2xl:items-between 2xl:flex-grow'>
+          {
+             !!featuredProducts.length ?
+             ( 
+            <section className='flex flex-col items-center w-full mt-10 xs:mt-16 lg:mt-0 lg:items-start 2xl:items-between 2xl:flex-grow'>
             <span className='text-lightOrange font-semibold xs:text-base 2xl:text-xl'>Featured Products</span>
   
             <div className='mt-20 w-full flex flex-wrap gap-2 gap-y-16 justify-center lg:justify-start lg:gap-2 2xl:mt-28 2xl:gap-0 2xl:justify-between'>
@@ -104,6 +107,9 @@ const IndividualCategory = ({category, slideNum}) => {
   
             <button onClick={handleNavigate} className='xs:hidden mt-8 bg-lightOrange text-xs lowercase p-2 px-6 text-pureWhite rounded-md'>VIEW All</button>
           </section>
+             ) : <h2 className='text-lightOrange'>This section is Under Develelopment</h2>
+          }
+          
       </section>
     )
   }

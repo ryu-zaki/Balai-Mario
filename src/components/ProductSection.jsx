@@ -11,10 +11,10 @@ import { Outlet, useLocation, useNavigate } from 'react-router';
 import { Element, scroller } from 'react-scroll';
 import { useAvailableRecipes } from '../context/AvailableRecipes';
 
+
 const ProductSection = () => {
 
     const {productSecMarkerRef} = useAnimationGSAP();
-    
     
     return (
         <div className='product-section'> 
@@ -42,7 +42,7 @@ const ProductSection = () => {
             </div>
             </div>
 
-            <div className='pt-20 z-10 relative categories-loop bg-pureWhite overflow-hidden whitespace-nowrap pb-6 sm:pb-10'>
+            <div className='pt-20 z-10 scroll-smooth relative categories-loop bg-pureWhite overflow-hidden whitespace-nowrap pb-6 sm:pb-10'>
 
                 <CategoriesWrapper />
                 <CategoriesWrapper />
@@ -60,8 +60,6 @@ export const AvailableDish = ({data}) => {
   
     const {recipeName, price, image, hearts} = data;
     const invInfo = invUserProInfo.find(data => data.recipeName === recipeName);
-    
-    const [variant, setVariant] = React.useState("whole");
 
     const navigate = useNavigate();
 
@@ -84,7 +82,7 @@ export const AvailableDish = ({data}) => {
     }
 
     return (
-        <div className='dark-shadow bg-pureWhite dish-box relative p-3 pt-16 flex flex-col items-center justify-end xs:p-4 xs:pt-16 lg:pt-24 lg:p-5 xl:pt-28 xl:p-6'>
+        <div className='dark-shadow avaialble-dish bg-pureWhite dish-box relative p-3 pt-16 flex flex-col items-center justify-end xs:p-4 xs:pt-16 lg:pt-24 lg:p-5 xl:pt-28 xl:p-6'>
             <img draggable={false} className='object-cover border-4 border-lightOrange w-2/3 select-none -translate-y-1/2 rounded-full absolute top-0 aspect-1 max-w-24 lg:max-w-32 xl:max-w-40' src={image} alt='' />
             <div className='w-full flex flex-col gap-3 xl:gap-5'>
                 <div className='flex justify-between gap-1 items-start'>
@@ -141,6 +139,8 @@ const CategoriesWrapper = () => {
     }, 0)
 
   }
+
+
 
   return (
     <div className='categories-wrapper title-font'>
@@ -217,7 +217,7 @@ const SearchBar = ({style}) => {
     const {recipeName, category, image} = data; 
 
     const searchedName = recipeName.split("").map((text, index) => {
-      return searchText.toLowerCase().includes(text) && index < searchText.length ? <b className='text-lightOrange'>{text}</b> : text
+      return searchText.toLowerCase().includes(text) && index < searchText.length ? <b key={index} className='text-lightOrange'>{text}</b> : text
     });
 
     const handleNavigate = () => {
@@ -297,5 +297,6 @@ const SearchBar = ({style}) => {
   )
 
 }
+
 
 export default ProductSection;

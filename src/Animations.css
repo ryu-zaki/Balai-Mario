@@ -84,6 +84,8 @@
         scale: 1 1;
         opacity: 1;
         translate: 0 0;
+        rotate: 0;
+       /*  transform: rotate(0); */
         backdrop-filter: blur(0);
     }
     
@@ -198,6 +200,57 @@
 
 }
 
+
+
+
+.avaialble-dish > img,
+.avaialble-dish {
+    translate: 0 -4em;
+    animation: stateBack .8s forwards;
+}
+
+.avaialble-dish > img {
+    animation-delay: .1s;
+}
+
+
+.inv-hero .inv-main-img {
+    transform: rotate(90deg);
+    translate: 100% 0;
+    animation: invImage 1s forwards;
+}
+
+@keyframes invImage {
+
+    to {
+        transform: rotate(0);
+        translate: 3em 0;
+    }
+    
+}
+
+@media (min-width: 440px) {
+
+    .inv-hero .inv-main-img {
+        transform:  rotate(90deg);
+        translate: 0 0;
+        scale: 0;
+        opacity: 0;
+        
+    }
+    
+    @keyframes invImage {
+    
+        to {
+            transform:  rotate(0deg);
+            scale: 1;
+            opacity: 1;
+        }
+        
+    }
+    
+}
+
 @media (min-width: 768px) {
 
    
@@ -282,6 +335,246 @@
     }
 } 
 
+.about-us-quote {
+    translate: 0 100%; 
+}
+
+.about-us-quote.active {
+    animation: aboutUsReveal 2s .8s forwards;
+}
+
+@keyframes aboutUsReveal {
+
+     50% {
+        translate: 0 -50%;
+     }
+
+     100% {
+        translate: 0 50%;
+     }
+    
+    
+}
+
+.preview-container  .product-preview .proNum {
+    translate: -100% 0;
+    opacity: 0;
+}
+
+.preview-container.active  .product-preview .proNum {
+    translate: 0 0;
+    opacity: 1;
+}
+
+.preview-container > *.product-preview:nth-of-type(1) .proNum {
+    transition-delay: .2s;
+}
+
+.preview-container > *.product-preview:nth-of-type(2) .proNum {
+    transition-delay: .4s;
+}
+
+.preview-container > *.product-preview:nth-of-type(3) .proNum {
+    transition-delay: .6s;
+}
+
+.services-main-con .services-con-left > * {
+    translate: -50% 0;
+    opacity: 0;
+}
+
+.services-main-con.active .services-con-left > * {
+    animation: stateBack 1s forwards;
+}
+
+.services-main-con.active .services-con-left > *:nth-child(2) {
+    animation-delay: .2s;
+}
+
+.services-main-con.active .services-con-left > *:nth-child(3) {
+    animation-delay: .4s;
+}  
+
+/* Flip Card */
+
+.flip-card {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+
+    transition: all 2s;
+    transform: rotateY(.5turn);
+}
+
+.feature-overlay > div {
+    translate: 0 -50%;
+    transform-style: preserve-3d;
+}
+
+.flip-card > * {
+    backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.flip-card .back__side {
+   transform: rotateY(.5turn) translateZ(1em);
+} 
+
+.flip-card .front__side > * {
+    transform: translateZ(3em);
+}
+
+.flip-card .front__side::before {
+
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    scale: 1.1;
+    border: 1px solid var(--lightOrange);
+    background-color: var(--pureWhitw);
+    transform: translateZ(1em);
+}
+
+.flip-card .back__side > * {
+    transform: translateZ(2em);
+}
+
+.services-main-con.active .feature-overlay div > .flip-card {
+    transition-delay: .2s;
+    transform: rotateY(0);
+}
+
+.services-main-con.active .feature-overlay div:hover > .flip-card {
+    transition-delay: 0s;
+    transform: rotateY(.5turn);
+}
+
+.receipt-card {
+    scale: 0;
+    animation: stateBack .5s forwards;
+}
+
+
+.inv-main-desc > span {
+    scale: 0;
+    animation: stateBack .6s forwards;
+}
+
+.inv-main-desc > :is(h1, div:nth-of-type(1), p, div:nth-of-type(2)) {
+    translate: 0 -2em;
+    animation-name: stateBack;
+    animation-duration: .8s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+.nav-main-desc > :is(h1) {
+    animation-delay: 0;
+} 
+
+.inv-main-desc > :is(div:nth-of-type(1)) {
+    animation-delay: .1s;
+}
+
+.inv-main-desc > :is(p) {
+    animation-delay: .2s;
+}
+
+.inv-main-desc > :is(div:nth-of-type(2)) {
+    animation-delay: .3s;
+}
+
+.inv-suggested-recipe > div {
+    scale: 0;
+    transform-origin: bottom left;
+}
+
+.inv-suggested-recipe.active > img,
+.inv-suggested-recipe.active::before,
+.inv-suggested-recipe.active > div {
+    animation: stateBack .8s forwards,  backRotate .8s forwards;
+}
+
+.inv-suggested-recipe > img,
+.inv-suggested-recipe::before {
+    scale: .5;
+    opacity: 0;
+    transform: rotate(90deg);
+   
+}  
+
+@keyframes backRotate {
+
+    to {
+        transform: rotate(0);
+    }
+    
+}
+
+.inv-suggested-recipe  button {
+    translate: -2em 0;
+    opacity: 0;
+    animation: stateBack .8s .6s forwards;
+}
+
+.inv-suggested-recipe::before {
+    animation-delay: .3s;
+}
+
+
+.blog-quote-box {
+    translate: 0 -50%;
+}
+
+.blog-quote-box.active {
+    animation: quoteBoxReveal 2s forwards;
+}
+
+@keyframes quoteBoxReveal {
+
+    50% {
+        translate: 0 100%;
+    } 
+
+    100% {
+        translate: 0 0;
+    }
+    
+}
+
+.feature-blog-imgs > div img {
+    translate: 0 -3em;
+    opacity: 0  ;
+
+}
+
+.feature-blog-imgs.active > div img {
+    animation: stateBack .8s forwards;
+}
+
+.feature-blog-imgs.active > div:nth-child(2) img {
+    animation-delay: .2s;
+}
+
+
+@media (min-width: 768px) {
+    .inv-main-desc > :is(h1, div:nth-of-type(1), p, div:nth-of-type(2)) {
+        translate: -2em 0;
+        /* animation-name: stateBack;
+        animation-duration: .6s;
+        animation-fill-mode: forwards;
+        opacity: 0; */
+    }
+
+    .feature-blog-imgs > div img {
+        translate: -3em 0;
+    
+    }
+}
+
+
 @media (min-width: 970px) {
     .product-category-section .featured-product {
         translate: -50% 0;
@@ -296,4 +589,67 @@
     .product-category-section .featured-product:nth-child(3) {
         animation-delay: .6s;
     }
+
+
+    /* Receipt */
+    .receipt-card {
+        opacity: 0;
+        scale: 1;
+    }
+
+    .receipt-card > * {
+        animation: stateBack .9s forwards;
+    }
+
+    .receipt-card > *:nth-child(1) {
+        translate: 30% 0;
+    }
+
+    .receipt-card > *:nth-child(2) {
+        translate: -30% 0;
+    }
+}
+
+@media (min-width: 1180px) {
+    
+
+    .inv-hero .inv-main-img {
+        transform:  rotate(180deg);
+        translate: 0 100%;
+        scale: 1;
+        opacity: 0;
+        animation-duration: 1s;
+    }
+
+    @keyframes invImage {
+    
+        to {
+            transform:  rotate(0deg);
+            translate: 0 2em;
+            opacity: 1;
+        }
+        
+    }
+
+    .about-us-quote {
+        translate: 90% 50%; 
+    }
+    
+    .about-us-quote.active {
+        animation: aboutUsReveal 2s 0s forwards;
+    }
+    
+    @keyframes aboutUsReveal {
+    
+         50% {
+            translate: -30% 50%;
+         }
+    
+         100% {
+            translate: 0 50%;
+         }
+        
+        
+    }
+
 }

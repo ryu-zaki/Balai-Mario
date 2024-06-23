@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import heartIcon from '../assets/materials/heart-icon.png';
 import heartFill from '../assets/materials/heart-fill.png';
 import BlogFeature from './BlogFeature';
@@ -6,8 +6,20 @@ import { useLocation, useNavigate, useParams } from 'react-router';
 import { useAvailableRecipes } from '../context/AvailableRecipes';
 import { scroller } from 'react-scroll';
 
-const IndividualProduct = () => {
+const IndividualProduct = ({setIntersectionObserver}) => {
+ 
+    const [suggestedVisible, setSuggestedVisible] = React.useState(false);
+    const suggestedRef = useRef(null);
 
+    const [quoteVisible, setQuoteVisible] = React.useState(false);
+    const quoteRef = React.useRef(null);
+
+    React.useEffect(() => {
+
+       setIntersectionObserver(suggestedRef.current, setSuggestedVisible);
+       setIntersectionObserver(quoteRef.current, setQuoteVisible, .2);
+
+    }, [])
 
     React.useEffect(() => {
         window.scrollTo({
@@ -143,13 +155,13 @@ const IndividualProduct = () => {
 
           {/* Suggested Recepis */}
 
-          <SugggestedRecipes />
-          <BlogFeature />
+          <SugggestedRecipes suggestedRef={suggestedRef} suggestedVisible={suggestedVisible}/>
+          <BlogFeature quoteRef={quoteRef} quoteVisible={quoteVisible} />
         </div>
     )
 }
 
-const SugggestedRecipes = () => {
+const SugggestedRecipes = ({suggestedRef, suggestedVisible}) => {
     const navigate = useNavigate();
 
     const Recipe = ({data}) => {
@@ -169,11 +181,11 @@ const SugggestedRecipes = () => {
         }
 
         return (
-            <section className='inv-suggested-recipe relative max-w-44 sm:max-w-60 xl:max-w-72 2xl:max-w-80'>
+            <section className={`${suggestedVisible && "active"} inv-suggested-recipe relative max-w-44 sm:max-w-60 xl:max-w-72 2xl:max-w-80`}>
 
                 <img className='absolute rounded-full inset-0 w-full h-full object-cover' alt='' src={image} />
 
-                <div className='right-2 -top-5 translate-x-1/4 absolute bg-pureWhite border border-lightOrange p-2 px-3 rounded-xl pb-3 xs:p-3 xs:px-6 xl:px-9 xl:py-4'>
+                <div className='right-2 -top-5 z-10 translate-x-1/4 absolute bg-pureWhite border border-lightOrange p-2 px-3 rounded-xl pb-3 xs:p-3 xs:px-6 xl:px-9 xl:py-4'>
                     <h3 className='capitalize font-semibold xl:text-lg'>{recipeName}</h3>
                     <div className='flex mt-1  items-center text-lightOrange font-semibold gap-1'>
                         <img className='w-4 lg:w-5' src={heartIcon} alt='' />
@@ -184,7 +196,7 @@ const SugggestedRecipes = () => {
                     <p className='bg-lightOrange rounded-full text-pureWhite p-1 px-3 absolute bottom-0 translate-y-1/2 right-2'>&#8369;{isNaN(price) ? price.whole.toFixed(2) : price.toFixed(2)}</p>
                 </div>
 
-                <button onClick={handleNavigate} className='bg-lightOrange text-pureWhite p-2 px-4 -bottom-2 border border-pureWhite absolute rounded-full sm:p-3 sm:px-6 sm:bottom-2 xl:px-9 xl:p-4'>Order now</button>
+                <button onClick={handleNavigate} className='bg-lightOrange z-10 text-pureWhite p-2 px-4 -bottom-2 border border-pureWhite absolute rounded-full sm:p-3 sm:px-6 sm:bottom-2 xl:px-9 xl:p-4'>Order now</button>
               
             </section>
         )
@@ -225,7 +237,7 @@ const SugggestedRecipes = () => {
                 <h2 className='text-3xl title-font responsive-title font-semibold mt-7'>Suggested Recipes</h2>
             </div>
 
-            <div className='suggested-recipes mt-16 flex flex-wrap justify-center gap-5 gap-y-16 xs:gap-y-20 xs:gap-7 sm:gap-10 sm:gap-y-20 sm:mt-20 lg:gap-16 xl:gap-20 xl:mt-32'>
+            <div ref={suggestedRef} className='suggested-recipes mt-16 flex flex-wrap justify-center gap-5 gap-y-16 xs:gap-y-20 xs:gap-7 sm:gap-10 sm:gap-y-20 sm:mt-20 lg:gap-16 xl:gap-20 xl:mt-32'>
               
               {suggestionLimit}
               

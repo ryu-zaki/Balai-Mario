@@ -4,6 +4,7 @@ import {useAnimationGSAP} from '../context/AnimationGSAP'
 import { AvailableDish } from './ProductSection';
 import { useAvailableRecipes } from '../context/AvailableRecipes';
 import { scroller } from 'react-scroll';
+import { SliderController } from '../App';
 
 export const divideArr = (arr, numChunks) => {
 
@@ -45,8 +46,8 @@ const CategoryProducts = () => {
           return divideArr(filtered, 9);
 
         })
-        console.log(controlIndex);
-      }, [recipes, controlIndex]);
+    
+      }, [recipes, controlIndex, params.category]);
 
       const handleNext = () => {
         setControlIndex(prev => prev + 1 >= availables.length ? prev : prev + 1 );
@@ -65,23 +66,27 @@ const CategoryProducts = () => {
       <>
 
       <div className='w-full pb-32 relative z-10 bg-ash pt-8 sm:pt-0'>
-          
-          <div className='relative items-start products-grid-container mx-auto mt-32 sm:mt-40 lg:mt-52 xl:mt-60'>
+          <div className='relative global-products-container mx-auto flex flex-col mt-32 '>
+          <SliderController 
+             currentSlide={controlIndex}
+             setState={setControlIndex}
+             arrLength={availables.length}
+             style={"justify-between sm:justify-end mb-36"}
+           />
+          <div className='relative items-start products-grid-container'>
              {availables[controlIndex]}
 
               <h2 ref={bgTextRef} className={`w-fit whitespace-nowrap text-nowrap overflow-hidden select-none absolute bg-text -top-24 left-0 capitalize opacity-50 -z-10 text-brown title-font ${params.category.split(" ").length >= 3 ? "-top-32 sm:-top-24 text-3xl xs:text-5xl lg:text-6xl xl:text-7xl" : isTooLong ? "text-4xl xs:text-6xl lg:text-7xl xl:text-8xl" :  "text-6xl xs:text-7xl lg:text-8xl xl:text-9xl"}  lg:-top-32  xl:-top-40 xl:-left-14 2xl:-left-24`}><span className='text-wrap'>{params.category}</span></h2>
            </div> 
 
-           <div className='flex items-center px-5 mt-14 carousel-control justify-between xs:px-0 sm:px-6 lg:mt-20'>
-           <div className='text-pureWhite text-xs flex gap-3 z-30 sm:text-sm'>
-             <button onClick={handlePrev} className={`${!controlIndex ? "bg-lightGray cursor-not-allowed" : "bg-lightOrange"} py-2 px-6 rounded-lg border border-pureWhite lg:py-3 lg:py-3`}>Previous</button>
-             
-             <button onClick={handleNext} className={`${controlIndex + 1 >= availables.length ? "bg-lightGray cursor-not-allowed" : "bg-lightOrange"} py-2 px-6 rounded-lg border border-pureWhitelg:py-3 lg:px-8`}>Next</button>
-           </div> 
-
-           <p className='font-semibold flex gap-2 text-sm sm:text-base'><span>{controlIndex + 1}</span>of<span>{availables.length}</span></p>  
+           <SliderController 
+             currentSlide={controlIndex}
+             setState={setControlIndex}
+             arrLength={availables.length}
+             style={"justify-between xs:justify-center lg:justify-start mt-20"}
+           />
            </div>
-           
+
       </div>
 
       </>

@@ -3,8 +3,6 @@ import mainPic from '../assets/business_assets/main-img.jpg';
 import food1 from '../assets/business_assets/food-img1.png';
 import food2 from '../assets/business_assets/food-img2.jpg';
 import chevronRight from '../assets/materials/chevron-right.png';
-import CustomerIcon from '../assets/materials/customer-icon.jpg';
-import StarFill from '../assets/materials/star-fill.png';
 
 import kenzoImg from '../assets/icons/kenzo.jpg';
 import kingpaulImg from '../assets/icons/kingpaul.jpg';
@@ -22,6 +20,12 @@ const HeroSection = () => {
     window.scrollTo({
       top: 0
     })
+  }
+
+  const handleFbPage = ({target}) => {
+
+    target.nextElementSibling.click();
+
   }
 
     return (
@@ -80,7 +84,13 @@ const HeroSection = () => {
 
           <div className='flex gap-7 flex-col items-center hero-btns lg:flex-row lg:mt-3'>
             <button onClick={() => {navigate('/products'); resetScroll()}} className='text-xs bg-lightOrange text-pureWhite p-4 px-9 rounded-full sm:text-sm'>EXPLORE MENU</button>
-            <button className='flex items-center gap-2 text-sm'><span>Visit Facebook Page</span><img className='w-3' src={chevronRight} alt='' /></button>
+            <button className='relative flex items-center gap-2 text-sm'>
+                <i onClick={handleFbPage} className='cursor-pointer absolute inset-0 w-full h-full'></i>
+                <a target='_blank' href='https://www.facebook.com/balaimariosilang' className='hidden'></a>
+
+               <span>Visit Facebook Page</span>
+               <img className='w-3' src={chevronRight} alt='' />
+              </button>
           </div>
 
           

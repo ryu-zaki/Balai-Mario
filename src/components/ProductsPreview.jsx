@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { scroller } from 'react-scroll';
 
 
-const ProductsPreview = () => {
+const ProductsPreview = ({previewRef, previewSecActive}) => {
 
     return (
         <div className='preview-section flex flex-col gap-8 lg:gap-14 xl:gap-20'>
@@ -15,8 +15,8 @@ const ProductsPreview = () => {
             <h2 className='title-font text-darkBrown responsive-title lg:mt-5'>Our Products</h2>
           </div>
           
-          <div className='flex flex-col relative gap-4 preview-container mx-auto lg:flex-row xl:gap-8'>
-            <div className='absolute w-32 h-32 lg:w-52 lg:h-52 bg-lightOrange -top-4 -z-10 rounded-2xl -left-4'></div>
+          <div ref={previewRef} className={`${previewSecActive && 'active'} flex flex-col relative gap-4 preview-container mx-auto lg:flex-row xl:gap-8`}>
+            <div className='absolute colored-decor w-32 h-32 lg:w-52 lg:h-52 bg-lightOrange -top-4 -z-10 rounded-2xl -left-4'></div>
             <ProductPreview 
               proNum={"01"} 
               ImgSrc={starterCover} 
@@ -75,11 +75,11 @@ const ProductPreview = ({proNum, ImgSrc, title, price, message}) => {
             <img className='absolute object-cover -z-10 inset-0 w-full h-full' src={ImgSrc} alt='' />
 
             
-            <h2 className='absolute m-0 text-5xl top-4 title-font left-4 z-10 lg:text-6xl xl:top-6 xl:left-6'>{proNum}</h2>
+            <h2 className='absolute m-0 proNum text-5xl top-4 title-font left-4 z-10 lg:text-6xl xl:top-6 xl:left-6'>{proNum}</h2>
                 
             <div className='absolute desc bottom-0 right-0 z-10 flex flex-col  text-right items-end'>
                 <p className='rounded-tl-xl relative right-0 bg-pureWhite text-xs p-2 pl-4 transition-all duration-700  font-semibold text-darkBrown lg:text-sm xl:pl-6 xl:p-3'>Starts at ₱
-{price}.00</p>
+                  {price}.00</p>
                 <h3 className='rounded-tl-xl bg-lightOrange m-0 transition-all duration-700  p-2 px-5 pl-20 text-sm lg:text-base xl:pl-20 xl:text-lg xl:py-3'>{title}</h3>
             </div>
 

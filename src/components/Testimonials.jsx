@@ -39,7 +39,7 @@ const Testimonials = () => {
 
     React.useEffect(() => {
 
-        setTimeout(() => {
+    const testimonials = setTimeout(() => {
 
             setTestimonialIndex(prev => {
                 if (prev < customers.length - 1) {
@@ -50,6 +50,10 @@ const Testimonials = () => {
             })
 
         }, 8000)
+
+    return () => {
+        clearTimeout(testimonials);
+    }
 
     
     }, [testimonialIndex])
