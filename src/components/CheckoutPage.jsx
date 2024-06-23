@@ -61,7 +61,6 @@ const CheckoutPage  = ({setIsFinish}) => {
         if (!!checkoutPages.length && pagesIndex === checkoutPages.length) {
             setIsFinish(true);
         }
-        console.log(pagesIndex);
 
 
     }, [pagesIndex, checkoutPages])
@@ -366,7 +365,7 @@ const OrderSummary = () => {
                 <h3 className='text-lightOrange font-semibold lg:text-xl'>Personal Info</h3>
                 <div className='mt-5 flex flex-wrap gap-10 sm:gap-5 lg:flex-col lg:gap-8'>
                     <InfoBox label={"Full Name"}  value={"Jhonwell Espanola"}/>
-                    <InfoBox label={"Email"}  value={"Jhonwell Espanola"}/>
+                    <InfoBox label={"Email"}  value={"jhonwellespanola@gmail.com"}/>
                     <InfoBox label={"Phone Number"}  value={"09514406062"}/>
                 </div>
             </div>
