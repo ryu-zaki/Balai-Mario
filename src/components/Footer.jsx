@@ -62,9 +62,9 @@ const Footer = () => {
                 <div className='flex max-w-80 flex-col gap-2 items-center md:items-start xl:max-w-96'>
                     <p className='text-sm xl:text-base'>Subscribe to our newsletter to stay updated about balai mario</p>
 
-                    <div className="flex rounded-md w-11/12 overflow-hidden mt-3 xl:w-4/5">
+                    <div className="flex rounded-md w-auto overflow-hidden mt-3 xl:w-4/5">
                         <input type='email' className="p-3 border-0 outline-0 text-sm text-darkBrown bg-white md:text-xs xl:text-sm flex-grow" placeholder="Your email" />
-                        <button className="border-l border-lightOrange text-xs text-lightOrange font-semibold bg-pureWhite p-2 px-3 xl:text-sm">subscribe</button>
+                        <button className="flex-grow border-l border-lightOrange text-xs text-lightOrange font-semibold bg-pureWhite p-2 px-3 xl:text-sm">subscribe</button>
                     </div>
 
                     <div className="flex gap-2 mt-2 justify-center xl:gap-5 xl:mt-4">

@@ -138,7 +138,7 @@ const CheckoutPage  = ({setIsFinish}) => {
 
               </div>
 
-              <div className='flex gap-2 mt-10  justify-end text-xs text-pureWhite sm:text-sm lg:text-base lg:gap-4'>
+              <div className='pr-5 flex gap-2 mt-10  justify-end text-xs text-pureWhite sm:text-sm sm:pr-0 lg:text-base lg:gap-4'>
                  {
                     !!pagesIndex ? <button onClick={handleIndex} id="sub" className='rounded-lg bg-lightOrange p-2 px-6 lg:px-9'>Back</button> : <button onClick={handleCancel} className='rounded-lg bg-lightOrange p-2 px-6 lg:px-9'>Cancel</button>
                  }

@@ -232,9 +232,9 @@ const SugggestedRecipes = ({suggestedRef, suggestedVisible}) => {
     return (
         <div className='mt-32'>
             
-            <div className='flex flex-col items-center gap-5'>
-                <span className='text-sm dark-shadow text-lightOrange p-3 px-8 rounded-full'>RECOMMENDATIONS</span>
-                <h2 className='text-3xl title-font responsive-title font-semibold mt-7'>Suggested Recipes</h2>
+            <div className='flex text-center flex-col items-center gap-5 sm:gap-8 lg:gap-10'>
+                <span className='text-xs dark-shadow text-lightOrange p-3 px-8 rounded-full'>RECOMMENDATIONS</span>
+                <h2 className='text-3xl title-font responsive-title font-semibold'>Suggested Recipes</h2>
             </div>
 
             <div ref={suggestedRef} className='suggested-recipes mt-16 flex flex-wrap justify-center gap-5 gap-y-16 xs:gap-y-20 xs:gap-7 sm:gap-10 sm:gap-y-20 sm:mt-20 lg:gap-16 xl:gap-20 xl:mt-32'>
