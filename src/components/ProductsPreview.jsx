@@ -1,6 +1,6 @@
 import React from 'react';
 import starterCover from '../assets/products/crispy-kangkong.jpg';
-import vegetarianCover from '../assets/products/pinakbet.jpg';
+import vegetarianCover from '../assets/products/vegemeat caldereta.jpg';
 import chickenCover from '../assets/products/fried-chicken.jpg';
 import { useLocation, useNavigate } from 'react-router';
 import { scroller } from 'react-scroll';
