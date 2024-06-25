@@ -43,7 +43,7 @@ const NoteModal = () => {
                 
             </div>
 
-            <p className='text-sm leading-7 md:text-base md:leading-8'>This website is for demonstration purposes only, and all the features, data processing, and functionality <b>have not been fully developed</b>. The designs, layout and contents are just drafts and we can actually change or alter it based on your needs and preference. Thank you and have a nice day!</p>
+            <p className='text-sm leading-7 md:text-base md:leading-8'>This website is for demonstration purposes only, and all the features, data processing, and functionality <b>have not been fully developed</b>. The designs, layout and contents are just drafts and we can actually change or alter it based on the needs and preference of your business. Thank you and have a nice day!</p>
 
             <button className={`${isBtActive ? "bg-lightOrange" : "bg-lightGray cursor-not-allowed"} self-center py-2 rounded-lg transition-all w-11/12 text-pureWhite md:self-start md:w-1/2 md:py-3`} onClick={handleModalVisible} >continue</button>
             
