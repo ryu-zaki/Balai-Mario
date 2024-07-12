@@ -1,24 +1,23 @@
 import React from 'react';
-import sampleProduct from '../assets/products/sample-product.jpg';
-import crossIcon from '../assets/materials/cross-icon.png';
 import chevronLeft from '../assets/materials/chevron-left.png';
 import deleteIcon from '../assets/materials/delete-icon.png';
 import { useNavigate } from 'react-router';
-import { useAvailableRecipes } from '../context/AvailableRecipes';
+import { useCart } from '../context/UserCartContext';
 
 const CartContents = ({allCartDishVisible, setAllCartDishVisible}) => {
 
     const navigate = useNavigate();
-    const {recipes} = useAvailableRecipes();
+    const {cartProducts, totalProducts} = useCart();
 
-    return (
+
+    return !!cartProducts.length && (
         <>
           <div onClick={() => setAllCartDishVisible(false)} className={`${!allCartDishVisible && "hidden"} fixed z-40 inset-0 bg-darkOverlay`}></div>
 
           <div className={`${!allCartDishVisible && "scale-0"} all-cart-dish p-5 transition-all duration-1000 rounded-xl bg-pureWhite w-11/12 z-40 fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 xs:p-7 xs:w-96 md:px-10`}>
             <div className='flex justify-between items-center'>
             <h2 className='text-2xl font-semibold xs:text-3xl'>Your Dish</h2>
-            <p className='text-sm font-semibold text-lightOrange'>(8 recipes)</p>
+            <p className='text-sm font-semibold text-lightOrange'>({totalProducts} recipes)</p>
 
             </div>
             
@@ -26,7 +25,7 @@ const CartContents = ({allCartDishVisible, setAllCartDishVisible}) => {
             <div className='my-5 overflow-auto dishes-container md:pr-10'>
                     
                    {
-                     recipes
+                     cartProducts
                      .filter((_, index) => index < 8)
                      .map((data, index) => <IndividualDish key={index} data={data} />)
                    }
@@ -43,9 +42,8 @@ const CartContents = ({allCartDishVisible, setAllCartDishVisible}) => {
                 <div className='flex gap-2 items-start font-semibold'>
                     <h3>Total</h3>
                     <span className='text-lg text-lightOrange md:text-xl'>&#8369;{
-                         recipes
-                         .filter((_, index) => index < 8)
-                         .map(({price}) => price)
+                         cartProducts
+                         .map(({price, quantity, isWhole}) => (!!price.whole ? price[isWhole ? "whole" : "half"] : price) * quantity)
                          .reduce((total, price) => total + price)
                          .toFixed(2)
                         }</span>
@@ -63,7 +61,7 @@ const CartContents = ({allCartDishVisible, setAllCartDishVisible}) => {
 
 const IndividualDish = ({data}) => {
 
-    const {recipeName, price, category, image} = data;
+    const {recipeName, price, category, image, quantity, isWhole} = data;
 
     return (
         <div className='flex gap-4 justify-between inv-cart-dish items-center text-xs my-4 w-full xxs:text-sm xs:gap-6 md:my-6 md:gap-10'>
@@ -72,11 +70,11 @@ const IndividualDish = ({data}) => {
               <div className='w-full'>
                 <span className='text-gray font-bold uppercase'>{category}</span>
                 <h3 className='font-bold w-11/12 capitalize max-w-32 md:max-w-60 truncate xs:text-base md:text-xl'>{recipeName}</h3>
-                <p className='text-lightOrange font-bold'>&#8369;{price.toFixed(2)}</p>
+                <p className='text-lightOrange font-bold'>&#8369;{(!!price.whole ? price[isWhole ? "whole" : "half"]  : price).toFixed(2)}</p>
               </div>
             </div>
 
-            <p className='text-lightOrange font-semibold xs:text-base md:text-xl'>x2</p>
+            <p className='text-lightOrange font-semibold xs:text-base md:text-xl'>x{quantity}</p>
 
             <img className='select-none w-4 xs:w-6 cursor-pointer' draggable={false} src={deleteIcon} alt="" />
 

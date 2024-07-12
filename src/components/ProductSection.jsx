@@ -5,11 +5,13 @@ import seachIcon from '../assets/materials/search-icon.png';
 import chevronIcon from '../assets/materials/chevron-right.png';
 import heartFill from '../assets/materials/heart-fill.png';
 import heartIcon from '../assets/materials/heart-icon.png';
+import CartSuccess from '../assets/materials/cart-success.png';
 import searchFailed from '../assets/materials/search-failed.png';
 import { useAnimationGSAP } from '../context/AnimationGSAP';
 import { Outlet, useLocation, useNavigate } from 'react-router';
 import { Element, scroller } from 'react-scroll';
 import { useAvailableRecipes } from '../context/AvailableRecipes';
+import { useCart } from '../context/UserCartContext';
 
 
 const ProductSection = () => {
@@ -57,6 +59,40 @@ const ProductSection = () => {
 
 export const AvailableDish = ({data}) => {
     const {handleHeartNum, handleHeartToggle, invUserProInfo, handleQuanOperation, handleVariant} = useAvailableRecipes();
+
+    const [isDishAdded, setIsAdded] = React.useState(false);
+    const {handleAddProCart, cartProducts, handleDeleteProCart} = useCart();
+
+    const [cartNotif, setCartNotif] = React.useState("Added to your cart");
+    const [notifVisible, setNotifVisible] = React.useState(false);
+
+    React.useEffect(() => {
+
+      if (notifVisible) {
+        const timeout = setTimeout(() => {
+          setNotifVisible(false);
+        }, 2000)
+
+
+        return () => clearTimeout(timeout);
+      }
+
+    }, [notifVisible]);
+
+    React.useEffect(() => {
+      if (isDishAdded) {
+        setCartNotif("Added to your cart");
+        setNotifVisible(true);
+
+        const addedTimer = setTimeout(() => {
+          setIsAdded(false)
+        }, 2000)
+
+
+        return () => clearTimeout(addedTimer);
+
+      }
+    }, [isDishAdded])
   
     const {recipeName, price, image, hearts} = data;
     const invInfo = invUserProInfo.find(data => data.recipeName === recipeName);
@@ -81,9 +117,34 @@ export const AvailableDish = ({data}) => {
       
     }
 
+    const handleCart = () => {
+      setIsAdded(true)
+      handleAddProCart({...invInfo, ...data});
+    }
+
+    const deleteFunc = (e) => {
+      handleDeleteProCart(e);
+      setCartNotif("Removed from your cart");
+      setNotifVisible(true);
+    }
+
     return (
-        <div className='dark-shadow avaialble-dish bg-pureWhite dish-box relative p-3 pt-16 flex flex-col items-center justify-end xs:p-4 xs:pt-16 lg:pt-24 lg:p-5 xl:pt-28 xl:p-6'>
-            <img draggable={false} className='object-cover border-4 border-lightOrange w-2/3 select-none -translate-y-1/2 rounded-full absolute top-0 aspect-1 max-w-24 lg:max-w-32 xl:max-w-40' src={image} alt='' />
+        <div className='dark-shadow available-dish bg-pureWhite dish-box relative p-3 pt-16 flex flex-col items-center justify-end xs:p-4 xs:pt-16 lg:pt-24 lg:p-5 xl:pt-28 xl:p-6'>
+          <CartNotifModal 
+            style={{
+              defaults: 'left-5 xs:left-16 lg:left-5',
+              to: "-top-16 scale-100 origin-left xs:-top-8 lg:-top-16",
+              from: "top-0 translate-y-full scale-0"
+            }}
+            isDishAdded={isDishAdded} 
+            notifVisible={notifVisible} 
+            cartNotif={cartNotif} 
+          />
+
+            <div className={`${isDishAdded && "active"} border-4 ${isDishAdded ? "border-green" : "border-lightOrange"} flex justify-center items-center rounded-img overflow-hidden mx-auto w-2/3 max-w-24 aspect-1 absolute top-0 -translate-y-1/2 rounded-full lg:max-w-32 xl:max-w-40`}>
+              {(isDishAdded) && <AnimatedCheckIcon  />}
+              <img draggable={false} className={`object-cover absolute inset-0 h-full w-full transition-all duration-500  select-none`} src={image} alt='' />
+            </div>
             <div className='w-full flex flex-col gap-3 xl:gap-5'>
                 <div className='flex justify-between gap-1 items-start'>
                   <h3 className='text-xs font-semibold xs:text-sm lg:text-lg xl:text-xl'>{recipeName}</h3>
@@ -114,7 +175,12 @@ export const AvailableDish = ({data}) => {
                 
                 
                 <div className='w-full gap-2 mt-3 flex flex-col items-stretch justify-between lg:flex-row'>
-                  <button className='flex-grow text-pureWhite text-xs bg-lightOrange p-2 rounded-lg lg:text-xs lg:p-3 xl:p-4 xl:rounded-xl'>ADD TO DISH</button>
+                  {
+                     cartProducts.some(data => data.recipeName === invInfo.recipeName) ? 
+                     (<button id={invInfo.recipeName} onClick={deleteFunc} className='flex-grow text-pureWhite text-xs bg-red p-2 rounded-lg lg:text-xs lg:p-3 xl:p-4 xl:rounded-xl'>REMOVE TO DISH</button>) : 
+                     (<button onClick={handleCart} className='flex-grow text-pureWhite text-xs bg-lightOrange p-2 rounded-lg lg:text-xs lg:p-3 xl:p-4 xl:rounded-xl'>ADD TO DISH</button>)
+                  }
+                  
 
                   <button onClick={() => navigate(recipeName)} className='flex-grow text-lightOrange border-lightOrange border text-xs p-2 rounded-lg lg:text-xs lg:p-3 xl:p-4 xl:rounded-xl'>DETAILS</button>
                 </div>
@@ -122,6 +188,27 @@ export const AvailableDish = ({data}) => {
             </div>
             </div>
     )
+}
+
+export const CartNotifModal = ({cartNotif, notifVisible, isDishAdded, style}) => {
+
+  const {from, to, defaults} = style
+
+  return (
+    <div className={`${defaults} p-1 px-6 ${isDishAdded && "delay-1000"} w-fit whitespace-nowrap transition-all duration-700 font-bold text-xs rounded-full dark-shadow absolute ${notifVisible ? to : from} z-50 text-lightOrange flex gap-2 items-center justify-center bg-pureWhite xs:px-4 xl:py-2`}>
+      <p className='text-xxs base-back'>{cartNotif}</p>
+      <img className='scale-75' src={CartSuccess} alt="" />
+    </div>
+  )
+}
+
+const AnimatedCheckIcon = () => {
+
+
+  return (
+     <svg className="checkmark aspect-1 z-20 absolute" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/> <path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+</svg>
+  )
 }
 
 const CategoriesWrapper = () => {

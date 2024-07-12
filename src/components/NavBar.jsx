@@ -27,12 +27,14 @@ import userDark24 from '../assets/materials/user-dark-24.png';
 import logoutDark24 from '../assets/materials/logout-dark-24.png';
 import settingsDark24 from '../assets/materials/settings-dark-24.png';
 import infoDark24 from '../assets/materials/info-dark-24.png';
+import EmptyIcon from '../assets/materials/empty-icon.png';
 
 import { useLocation, useNavigate, useParams } from "react-router";
 import { scroller } from "react-scroll";
 import { useUserinfo } from "../context/UserInfo";
 import CartContents from "./CartContents";
 import { useAvailableRecipes } from "../context/AvailableRecipes";
+import { useCart } from "../context/UserCartContext";
 
 
 const CreatemMoreNav = (navName, icon, modal) => {
@@ -134,7 +136,7 @@ const NavBar = () => {
               <img onClick={() => setSideNavVisible(false)} className="w-5 h-5 absolute top-3 right-3" src={crossIcon} alt="" />
               <h3 className="title-font text-darkBrown text-xl">Balai Mario</h3>
 
-              <div className="border-b border-darkBrown border-b-2 pb-10">
+              <div className="border-darkBrown border-b-2 pb-10">
                 <h3 className="text-gray font-semibold">Main</h3>
 
                 <nav className="nav-list">
@@ -213,7 +215,7 @@ const NavBar = () => {
                 ) : (
                     <div className="flex flex-col gap-9 text-darkBrown xxs:gap-14">
               <h2 className="text-sm font-semibold">Your Account</h2>
-              <div className="flex relative flex-col gap-8 user-icon-box items-center dark-shadow pt-8 py-5 px-4 rounded-xl px-5 xxs:pt-9">
+              <div className="flex relative flex-col gap-8 user-icon-box items-center dark-shadow pt-8 py-5 rounded-xl px-5 xxs:pt-9">
                
                 <div className="absolute top-0 left-6 w-10 -translate-y-1/2 aspect-1 flex items-center justify-center user-icon">
                     <img className="w-full h-full rounded-full" src={userIcon} alt="" />
@@ -326,10 +328,14 @@ const CartIcon = ({display, setCartVisible, isProductPage, setViewMore}) => {
         setCartVisible(true);
     }
 
+    const {totalProducts} = useCart();
+
     return (
         <div className={`${display} w-6 relative cart-icon 2xl:w-7`}>
              <div onClick={handleOpen} className="absolute inset-0 cursor-pointer z-10"></div>
-             <span className="absolute rounded-full -top-1 -right-3  bg-lightOrange text-pureWhite px-2">8</span>
+             {
+                !!totalProducts && <span className="absolute rounded-full -top-1 -right-3  bg-lightOrange text-pureWhite px-2">{totalProducts}</span>
+             } 
               <img className="w-full" src={isProductPage ? cartLight : cartDark} alt="" />
         </div>
     )
@@ -339,6 +345,7 @@ const CartModal = ({cartVisible, setCartVisible, setAllCartDishVisible}) => {
 
     const navigate = useNavigate();
     const {recipes} = useAvailableRecipes();
+    const {cartProducts, totalProducts} = useCart();
 
     const handleOpeAll = () => {
         setAllCartDishVisible(true);
@@ -347,7 +354,7 @@ const CartModal = ({cartVisible, setCartVisible, setAllCartDishVisible}) => {
 
     const DishBox = ({data}) => {
 
-        const {recipeName, image, price, category} = data;
+        const {recipeName, image, price, category, quantity, isWhole} = data;
 
         return (
             <div className={`flex justify-between cart-dish-box items-center border-b border-lightOrange pb-3 gap-5`}>
@@ -358,8 +365,8 @@ const CartModal = ({cartVisible, setCartVisible, setAllCartDishVisible}) => {
                         <span className="text-gray category text-xs block">{category}</span>
                         <h3 className="text-sm xs:text-base">{recipeName}</h3>
                         <div className="flex gap-2 mt-1">
-                          <p className="text-lightOrange text-xs xs:text-sm">&#8369;{price}</p>
-                          <span className="text-darkBrown font-bold text-xs xs:text-sm">x2</span>              
+                          <p className="text-lightOrange text-xs xs:text-sm">&#8369;{!!price.whole ? price[isWhole ? "whole" : "half"] : price}</p>
+                          <span className="text-darkBrown font-bold text-xs xs:text-sm">x{quantity}</span>              
                         </div>
                     </div>
                 </div>
@@ -371,12 +378,12 @@ const CartModal = ({cartVisible, setCartVisible, setAllCartDishVisible}) => {
     }
 
     return (
-        <div className={`${!cartVisible && "scale-0 origin-top-right"} transition-all duration-1000 p-6 absolute ease-in-out rounded-xl bg-ash w-11/12 dark-shadow flex flex-col -bottom-3 translate-y-full translate-x-1/2 right-1/2 xs:w-96 xs:p-8 xs:translate-x-0 xs:right-5 xs:-bottom-2 md:right-24 xl:right-32`}>
+        <div className={`${!cartVisible && "scale-0 origin-top-right"} min-h-72 transition-all duration-1000 p-6 absolute ease-in-out rounded-xl bg-ash w-11/12 dark-shadow flex flex-col -bottom-3 translate-y-full translate-x-1/2 right-1/2 xs:w-96 xs:p-8 xs:translate-x-0 xs:right-5 xs:-bottom-2 md:right-24 xl:right-32`}>
           <img onClick={() => setCartVisible(false)} draggable={false} className="cursor-pointer w-5 absolute top-3 right-3 xs:top-5 xs:right-5 xl:w-6" src={crossIcon} alt="" />
           <h2 className="text-2xl text-darkBrown font-semibold xs:text-3xl">Your Dish</h2>
           <div className="flex flex-col gap-4 my-5">
              {
-               recipes
+               cartProducts
                .filter((_, index) => index < 3)
                .map((data, index) => {
                    return <DishBox 
@@ -386,11 +393,28 @@ const CartModal = ({cartVisible, setCartVisible, setAllCartDishVisible}) => {
                })
              }
           </div>
-          <div className="flex text-darkBrown justify-between">
-          <span className="text-sm"><span className="text-lightOrange font-bold">5</span> other recipes</span>
-          <span onClick={handleOpeAll} className="cursor-pointer self-end text-sm underline text-lightOrange">View All</span>
-          </div>
-          <button onClick={() => navigate('/checkout')} className="block mt-3 text-sm text-pureWhite bg-lightOrange w-full text-center py-3 rounded-lg xs:py-4">CHECKOUT</button>
+          
+         {
+            cartProducts.length > 3 && (
+                <div className="flex text-darkBrown justify-between">
+                <span className="text-sm"><span className="text-lightOrange font-bold">{cartProducts.length - 3}</span> other recipe(s)</span> 
+                <span onClick={handleOpeAll} className="cursor-pointer self-end text-sm underline text-lightOrange">View All</span>
+                </div>
+            
+            
+        )
+         }
+          
+          {
+            !!totalProducts ? <button onClick={() => navigate('/checkout/cart-dish')} className="block mt-3 text-sm text-pureWhite bg-lightOrange w-full text-center py-3 rounded-lg xs:py-4">CHECKOUT</button> : (
+                <div className="text-gray flex-col gap-3 italic font-semibold flex-grow flex justify-center items-center">
+                <img src={EmptyIcon} alt="" />
+                <p className="opacity-65">Your Dish is Empty</p>
+                </div>
+                
+            )
+          }
+          
         </div>
     )
 }

@@ -16,6 +16,13 @@ const HeroSection = () => {
 
   const navigate = useNavigate();
 
+
+  React.useEffect(() => {
+
+    window.scrollTo({top: 0});
+
+  }, []);
+
   const resetScroll = () => {
     window.scrollTo({
       top: 0

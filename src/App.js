@@ -10,7 +10,7 @@ import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
 import GoogleMaps from './components/GoogleMaps';
 import ProductSection from './components/ProductSection';
-import { Route, Routes, useLocation } from 'react-router';
+import { Navigate, Route, Routes, useLocation } from 'react-router';
 import LogReg from './components/LogReg';
 import IndividualProduct from './components/IndividualProduct';
 import CategoryProducts, { divideArr } from './components/CategoryProducts';
@@ -22,9 +22,13 @@ import chevronLightLeft from './assets/materials/chevron-light-left.png';
 import CheckoutPage from './components/CheckoutPage';
 import ReceiptPage from './components/ReceiptPage';
 import NoteModal from './components/NoteModal';
+import { useCart } from './context/UserCartContext';
+import CheckoutValidate from './context/CheckoutValidate';
+
 
 function App() {
   const {categories} = useAvailableRecipes();
+  const {totalProducts, singleOrder} = useCart();
   const {pathname} = useLocation();
   const [controlsIndex, setControlsIndex] = React.useState(0);
   const [slideNum, setSlideNum] = React.useState(1);
@@ -49,22 +53,6 @@ function App() {
 
   }, [controlsIndex, categories]);
 
-  
-
-  const handleNextSlide = () => {
-    setControlsIndex(prev => prev + 1 >= individualCategories.length ? prev : prev + 1);
-   
-    if (controlsIndex >= individualCategories.length) return;
-    scroller.scrollTo('available-recipe');
-  }
-
-  const handlePrevSlide = () => {
-    setSlideNum(prev => prev <= 1 ? 1 : prev - 1);
-    setControlsIndex(prev => !prev ? 0 : prev - 3);
-
-    if (!controlsIndex) return;
-    scroller.scrollTo('available-recipe');
-  }
 
   React.useEffect(() => {
 
@@ -98,6 +86,8 @@ function App() {
     setIntersectionObserver(servicesRef.current, setServicesActive, .1);
 
   }, [aboutUsRef, servicesRef, aboutUsRef, pathname]);
+  
+  
 
   return (
     <div className='w-full'>
@@ -208,12 +198,18 @@ function App() {
         />
 
        <Route 
-         path='/checkout'
+         path='/checkout/:mode'
          element={
-         isFinish ? (
+         (!!totalProducts || !!singleOrder.recipeName) ? (
+         <CheckoutValidate>
+         {isFinish ? (
           <ReceiptPage setIsFinish={setIsFinish} />
-         ) : <div className='min-h-screen flex justify-center items-center'><CheckoutPage setIsFinish={setIsFinish} /></div>
-         }
+         ) : (
+              <div className='min-h-screen flex justify-center items-center'><CheckoutPage setIsFinish={setIsFinish} /></div>
+            ) }
+          </CheckoutValidate>) : <Navigate to={'/'} />
+            
+          }
        />
 
       </Routes>

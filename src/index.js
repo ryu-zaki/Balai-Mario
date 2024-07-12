@@ -7,6 +7,7 @@ import UserInfo from './context/UserInfo';
 import { BrowserRouter } from 'react-router-dom';
 import AnimationGSAP from './context/AnimationGSAP';
 import AvailableRecipes from './context/AvailableRecipes';
+import UserCartContext from './context/UserCartContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     <AnimationGSAP>
     <UserInfo>
       <AvailableRecipes>
-        <App />
+        <UserCartContext>
+         <App />
+        </UserCartContext>
       </AvailableRecipes>
       </UserInfo>
     </AnimationGSAP>

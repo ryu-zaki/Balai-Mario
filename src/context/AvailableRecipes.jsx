@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useRef } from 'react';
+import React, { createContext, useContext } from 'react';
 import { availRecipes, availCategories } from '../info/RecipesInfo';
 
 
@@ -6,7 +6,7 @@ const ComponentContext = createContext(null);
 
 const AvailableRecipes = ({children}) => {
     
-    const [categories, setCategories] = React.useState(availCategories);
+    const [categories] = React.useState(availCategories);
     const [recipes, setRecipes] = React.useState(availRecipes);
 
     const [invUserProInfo, setInvUserProInfo] = React.useState([]);
@@ -20,7 +20,7 @@ const AvailableRecipes = ({children}) => {
           if (arr[i].recipeName === recipeName) {
               const prevIsLiked = arr[i].isLiked;
               arr[i].isLiked = !prevIsLiked;
-              console.log(arr[i].isLiked)
+              
               break;
           }
 

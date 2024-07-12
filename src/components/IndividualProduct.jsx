@@ -5,6 +5,8 @@ import BlogFeature from './BlogFeature';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { useAvailableRecipes } from '../context/AvailableRecipes';
 import { scroller } from 'react-scroll';
+import { useCart } from '../context/UserCartContext';
+import { CartNotifModal } from './ProductSection';
 
 const IndividualProduct = ({setIntersectionObserver}) => {
  
@@ -27,9 +29,8 @@ const IndividualProduct = ({setIntersectionObserver}) => {
         })
     }, []);
 
-
-    const [isWhole, setIsWhole] = React.useState(true);
     const {recipes, invUserProInfo, handleHeartToggle, handleHeartNum, handleQuanOperation, handleVariant} = useAvailableRecipes();
+    const {cartProducts, handleAddProCart, handleDeleteProCart, setSingleOrder} = useCart();
     const {productId} = useParams();
     const {pathname} = useLocation();
     const navigate = useNavigate();
@@ -92,6 +93,44 @@ const IndividualProduct = ({setIntersectionObserver}) => {
         handleVariant(recipeName, target.id);
     };
 
+    const handleCart = () => {
+        setCartNotif("Added to Your Cart");
+        setNotifVisible(true);
+        handleAddProCart({...invInfo, ...invData});
+    }
+
+    const hanldeOrder = () => {
+        setSingleOrder({...invInfo, ...invData});
+       /*  console.log({...invInfo, ...invData})
+
+        return; */
+        navigate('/checkout/single-dish')
+    }
+
+    const removeProCart = (e) => {
+        handleDeleteProCart(e);
+
+        setCartNotif("Removed from Your Cart");
+        setNotifVisible(true);
+    }
+
+    /* Notif Modal */
+
+    const [cartNotif, setCartNotif] = React.useState('Added to your dish');
+    const [notifVisible, setNotifVisible] = React.useState(false);
+
+    React.useEffect(() => {
+ 
+        if (notifVisible) {
+            const timeout = setTimeout(() => {
+                setNotifVisible(false);
+            }, 2000)
+
+            return () => clearTimeout(timeout);
+        }
+
+    }, [notifVisible]);
+
     
     
     return (
@@ -120,7 +159,7 @@ const IndividualProduct = ({setIntersectionObserver}) => {
 
               <div className='flex gap-7 flex-col md:flex-row'>
                <div className='flex gap-5'>
-                    <div className='flex w-28 flex justify-between  text-lightOrange rounded-full py-2 font-semibold bg-lighterOrange sm:w-32 sm:text-lg md:w-28 md:text-sm lg:w-32 lg:text-lg'>
+                    <div className='w-28 flex justify-between  text-lightOrange rounded-full py-2 font-semibold bg-lighterOrange sm:w-32 sm:text-lg md:w-28 md:text-sm lg:w-32 lg:text-lg'>
                         <span onClick={handleQuantity} id="add" className='select-none cursor-pointer pl-5'>+</span>
                         <span>{invInfo.quantity}</span>
                         <span onClick={handleQuantity} className='pr-5 select-none cursor-pointer'>-</span>
@@ -143,9 +182,23 @@ const IndividualProduct = ({setIntersectionObserver}) => {
               }
               </div>
 
-                <div className='flex text-xs gap-2 lg:text-sm 2xl:gap-6'>
-                    <button className='bg-lightOrange p-3 px-6 text-pureWhite rounded-lg'>ADD TO DISH</button>
-                    <button className='border border-lightOrange p-3 px-6 text-lightOrange rounded-lg'>ORDER NOW</button>
+                <div className='flex text-xs gap-2  2xl:gap-6 sm:text-sm lg:text-base'>
+                    <CartNotifModal
+                      style={{
+                        defaults: "left-0 -bottom-4 translate-y-full",
+                        from: "-translate-x-full opacity-0",
+                        to: "opacity-1"
+                      }} 
+                      cartNotif={cartNotif} 
+                      notifVisible={notifVisible} 
+                    />
+                    {
+                        cartProducts.some(product => product.recipeName === invInfo.recipeName) ? (
+                            <button id={invInfo.recipeName} onClick={removeProCart} className='bg-red p-3 capitalize px-6 text-pureWhite rounded-lg'>remove to dish</button>) : <button onClick={handleCart} className='bg-lightOrange p-3 px-6 capitalize text-pureWhite rounded-lg'>Add To Dish</button>
+                        
+                    }
+                    
+                    <button onClick={hanldeOrder} className='border border-lightOrange capitalize p-3 px-6 text-lightOrange rounded-lg'>Order Now</button>
                 </div>
 
                </div>

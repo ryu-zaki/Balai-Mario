@@ -951,7 +951,7 @@ input[type="radio"]:checked ~ .custom-radio::before {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: .5em; 
-    row-gap: 1.2em;
+    row-gap: 2em;
 }
 
 .cart-dish-box .proName {
@@ -1007,6 +1007,28 @@ input[type="radio"]:checked ~ .custom-radio::before {
         translate: 0 0;
     }
     
+}
+
+/* Available Dish */
+.available-dish .rounded-img::before {
+
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0,0,0,0.3);
+    scale: 0;
+    z-index: 10;
+    transition: all .8s;
+    border-radius: 50%;
+
+}
+
+.available-dish .rounded-img.active::before {
+    scale: 1;
+}
+
+.text-xxs {
+    font-size: .7em;
 }
 
 @media (min-width: 375px) {
@@ -1493,6 +1515,10 @@ input[type="radio"]:checked ~ .custom-radio::before {
 
          
          
+    }
+
+    .text-xxs.base-back {
+        font-size: .9em;
     }
 
     .hero-title {

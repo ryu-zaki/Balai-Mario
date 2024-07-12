@@ -1,4 +1,6 @@
-
+:root {
+    --animatedCheckScale: .75;
+}
 
 .testimonial-box {
     translate: 0 -1em;
@@ -203,13 +205,13 @@
 
 
 
-.avaialble-dish > img,
-.avaialble-dish {
+.available-dish > img,
+.available-dish {
     translate: 0 -4em;
     animation: stateBack .8s forwards;
 }
 
-.avaialble-dish > img {
+.available-dish > img {
     animation-delay: .1s;
 }
 
@@ -558,6 +560,47 @@
     animation-delay: .2s;
 }
 
+/* Check Icon Animation */
+
+.checkmark {
+    width: 56px;
+    aspect-ratio: 1;
+    scale: var(--animatedCheckScale);
+    border-radius: 50%; 
+    display: block;
+    stroke-width: 2;
+    stroke: #fff;
+    stroke-miterlimit: 10;
+    margin: 10% auto;
+    box-shadow: inset 0px 0px 0px #7ac142;
+    animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
+}
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+@keyframes stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes scale {
+    0%,
+    100% {
+        transform: none;
+    }
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+@keyframes fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px #7ac142;
+    }
+}
+
 
 @media (min-width: 768px) {
     .inv-main-desc > :is(h1, div:nth-of-type(1), p, div:nth-of-type(2)) {
@@ -576,6 +619,11 @@
 
 
 @media (min-width: 970px) {
+   
+    :root {
+        --animatedCheckScale: .9;
+    }
+    
     .product-category-section .featured-product {
         translate: -50% 0;
         /* opacity: 0;
@@ -612,6 +660,9 @@
 
 @media (min-width: 1180px) {
     
+    :root {
+        --animatedCheckScale: 1;
+    }
 
     .inv-hero .inv-main-img {
         transform:  rotate(180deg);

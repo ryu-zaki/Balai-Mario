@@ -1,17 +1,18 @@
 import React from 'react';
 import receiptImg from '../assets/business_assets/receipt-img.jpg';
 import { useNavigate } from 'react-router';
+import { useCheckoutValidate } from '../context/CheckoutValidate';
 
 
 const ReceiptPage = ({setIsFinish}) => {
-
     const navigate = useNavigate();
+    const {userInfo} = useCheckoutValidate();
 
     const handleContinue = () => {
         setIsFinish(false);
         navigate('/');
     }
-
+   
     return (
         <div className='w-full h-screen text-darkBrown flex justify-center items-center'>
             <div className='receipt-card xxs:w-80 relative flex items-center justify-end'>
@@ -28,7 +29,7 @@ const ReceiptPage = ({setIsFinish}) => {
                     <h1 className='text-xl font-semibold text-center sm:text-2xl lg:text-3xl'>Thankyou For Your <br /> Reservation!</h1>
 
                     <div className='flex flex-col gap-4 border-b border-gray pb-5 sm:border-b-2 lg:text-lg lg:gap-6'>
-                        <p>Hello, Jhonwell</p>
+                        <p>Hello, {userInfo.fields[0].value}</p>
                         <p>Thank you for your order, your order will be process. You will receive an email confirmation shortly. Thank you!</p>
                     </div>
 

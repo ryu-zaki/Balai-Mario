@@ -32,9 +32,11 @@ module.exports = {
       "dark": "#0c0403",
       "darkBrown": "#2e2517",
       "darkRed": "#3b1c10",
+      "red": "#F14247",
       "brown": "#90591a",
       "lightGray": "#bbb",
       "gray": "#555",
+      "green": "#7ac142",
       "lightOrange": "#c46e24",
       
       "lighterOrange": "rgba(196,110,34,.2)",

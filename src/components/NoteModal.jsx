@@ -25,6 +25,8 @@ const NoteModal = () => {
         setModalVisible(false)
     }
 
+    return;
+
 
     return (
         <>
