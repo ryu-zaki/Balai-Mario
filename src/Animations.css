@@ -581,6 +581,17 @@
     stroke-dashoffset: 48;
     animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
 }
+
+.settings-box {
+    translate: 0 50%;
+    opacity: 0;
+    animation: stateBack .7s forwards;
+}
+
+.info-card {
+    scale: 0;
+    animation: stateBack .5s .2s forwards;
+}
 @keyframes stroke {
     100% {
         stroke-dashoffset: 0;

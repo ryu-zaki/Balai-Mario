@@ -24,6 +24,10 @@ import ReceiptPage from './components/ReceiptPage';
 import NoteModal from './components/NoteModal';
 import { useCart } from './context/UserCartContext';
 import CheckoutValidate from './context/CheckoutValidate';
+import AvailableAccounts from './components/AvailableAccounts';
+import Settings from './components/settingsPanel/Settings';
+import FaqComp from './components/FAQ/FaqComp.tsx';
+import AboutUsWhole from './components/AboutUsPage/AboutUsWhole.tsx';
 
 
 function App() {
@@ -42,6 +46,9 @@ function App() {
   const [previewSecActive, setPreviewSecActive] = React.useState(false);
   const [servicesSecActive, setServicesActive] = React.useState(false);
   const [isFinish, setIsFinish] = React.useState(false);
+  const [availableAccs, setAvailableAccs] = React.useState(false);
+  const [settingsPrivacy, setSettingsPrivacy] = React.useState(false);
+  const [faqsVisible, setFaqsVisible] = React.useState(false);
 
   React.useEffect(() => {
     const filteredFoods = categories
@@ -87,15 +94,20 @@ function App() {
 
   }, [aboutUsRef, servicesRef, aboutUsRef, pathname]);
   
-  
+  console.log(availableAccs)
 
   return (
     <div className='w-full'>
       <NoteModal />
+      {faqsVisible && <FaqComp setFaqsVisible={setFaqsVisible} />}
+      {settingsPrivacy && <Settings settingsPrivacy={settingsPrivacy} setSettingsPrivacy={setSettingsPrivacy}/>}
+
+      {availableAccs && <AvailableAccounts availableAccs={availableAccs} setAvailableAccs={setAvailableAccs} />}
+      
       <Routes>
         <Route path='/' element={
           <>
-            <NavBar />
+            <NavBar setFaqsVisible={setFaqsVisible} setSettingsPrivacy={setSettingsPrivacy} setAvailableAccs={setAvailableAccs} />
             <div className='px-7 flex flex-col gap-7 xl:px-14'>
           
                  <main className='flex mb-16 flex-col gap-32 items-center lg:gap-40 xl:gap-52'>
@@ -165,7 +177,7 @@ function App() {
         
         <Route path='/products/:category/:productId' element={
           <div>
-            <NavBar />
+            <NavBar setFaqsVisible={setFaqsVisible} setAvailableAccs={setAvailableAccs} />
 
             <IndividualProduct setIntersectionObserver={setIntersectionObserver}/>
           </div>} />
@@ -173,7 +185,7 @@ function App() {
         <Route path='/login' element={
           <div className='overflow-hidden'>
              <div className='px-7 xl:px-14'>
-            <NavBar />
+            <NavBar setFaqsVisible={setFaqsVisible} setAvailableAccs={setAvailableAccs} />
             </div>
             
             <LogReg />
@@ -187,7 +199,7 @@ function App() {
        <Route path='/register' element={
           <div className='overflow-hidden'>
           <div className='px-7 xl:px-14'>
-         <NavBar />
+         <NavBar setFaqsVisible={setFaqsVisible} setAvailableAccs={setAvailableAccs} />
          </div>
          
          <LogReg />
@@ -201,15 +213,25 @@ function App() {
          path='/checkout/:mode'
          element={
          (!!totalProducts || !!singleOrder.recipeName) ? (
-         <CheckoutValidate>
-         {isFinish ? (
+         isFinish ? (
           <ReceiptPage setIsFinish={setIsFinish} />
          ) : (
               <div className='min-h-screen flex justify-center items-center'><CheckoutPage setIsFinish={setIsFinish} /></div>
-            ) }
-          </CheckoutValidate>) : <Navigate to={'/'} />
+            ) ) : <Navigate to={'/'} />
             
           }
+       />
+
+       <Route 
+         path='/about-us'
+         element={
+          <>
+          <NavBar setFaqsVisible={setFaqsVisible} setAvailableAccs={setAvailableAccs} />
+          
+          <AboutUsWhole />
+          </>
+          
+         }
        />
 
       </Routes>

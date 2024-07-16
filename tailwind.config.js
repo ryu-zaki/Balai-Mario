@@ -41,6 +41,7 @@ module.exports = {
       
       "lighterOrange": "rgba(196,110,34,.2)",
       "pureWhite": "#fff",
+      "transparent": "rgba(0,0,0,0.0)",
 
       /* Overlay */
       "darkOverlay": "rgba(46,37,23, .7)",

@@ -37,26 +37,31 @@ import { useAvailableRecipes } from "../context/AvailableRecipes";
 import { useCart } from "../context/UserCartContext";
 
 
-const CreatemMoreNav = (navName, icon, modal) => {
+const CreatemMoreNav = (navName, icon, modal, setState = () => {}) => {
 
     return (
         {
             navName,
             icon,
             modal, 
+            setActive() {
+                setState(true);
+            }
         }
     )
 }
 
-const moreNavigations = [
-    CreatemMoreNav("Switch Account", userDark24),
-    CreatemMoreNav("Settings & Privacy", settingsDark24),
-    CreatemMoreNav("Help & Support", infoDark24),
-    CreatemMoreNav("Logout", logoutDark24)
-]
 
-const NavBar = () => {
+
+const NavBar = ({setAvailableAccs, setSettingsPrivacy, setFaqsVisible}) => {
     
+    const moreNavigations = [
+        CreatemMoreNav("Switch Account", userDark24, null, setAvailableAccs),
+        CreatemMoreNav("Settings & Privacy", settingsDark24, null, setSettingsPrivacy),
+        CreatemMoreNav("Help & Support", infoDark24, null, setFaqsVisible),
+        CreatemMoreNav("Logout", logoutDark24)
+    ]
+
     const navigate = useNavigate();
     const {isLogin} = useUserinfo();
     const resetScroll = () => {
@@ -173,10 +178,10 @@ const NavBar = () => {
                         <nav className="nav-list view-more">
                          <ul>
                             {
-                              moreNavigations.map(({navName, icon}, index) => {
+                              moreNavigations.map(({navName, icon, setActive}, index) => {
                                   return (
                                     <li key={index} className="relative">
-                                      <div className="absolute inset-0 cursor-pointer"></div>
+                                      <div onClick={setActive} className="absolute inset-0 cursor-pointer"></div>
                                       <img className="w-3" src={icon} alt="" />
                                       <span className="capitalize">{navName}</span>
                                     </li>
@@ -298,7 +303,7 @@ const NavBar = () => {
               cartVisible={cartVisible}/>
 
             {/* User Config */}
-            <UserConfigModal viewMore={viewMore}/>
+            <UserConfigModal moreNavigations={moreNavigations} viewMore={viewMore}/>
         </div>
         </div>
         </div>
@@ -420,7 +425,7 @@ const CartModal = ({cartVisible, setCartVisible, setAllCartDishVisible}) => {
 }
 
 
-const UserConfigModal = ({viewMore}) => {
+const UserConfigModal = ({viewMore, moreNavigations}) => {
 
 
     return (
@@ -439,10 +444,10 @@ const UserConfigModal = ({viewMore}) => {
           <nav className="mt-5">
             <ul className="flex flex-col gap-7 text-sm">
               {
-                moreNavigations.map(({navName, icon}, index) => {
+                moreNavigations.map(({navName, icon, setActive}, index) => {
                     return (
                         <li key={index} className="relative transition-all duration-300 flex items-center gap-3 hover:pl-5">
-                            <div className="cursor-pointer absolute inset-0 z-10"></div>
+                            <div onClick={setActive} className="cursor-pointer absolute inset-0 z-10"></div>
                             <img src={icon} />
                             <span>{navName}</span>
                         </li> 

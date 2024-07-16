@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AnimationGSAP from './context/AnimationGSAP';
 import AvailableRecipes from './context/AvailableRecipes';
 import UserCartContext from './context/UserCartContext';
+import CheckoutValidate from './context/CheckoutValidate';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +17,9 @@ root.render(
     <UserInfo>
       <AvailableRecipes>
         <UserCartContext>
-         <App />
+          <CheckoutValidate>
+          <App />
+          </CheckoutValidate>
         </UserCartContext>
       </AvailableRecipes>
       </UserInfo>
