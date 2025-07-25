@@ -19,7 +19,7 @@ const Footer = () => {
         <footer ref={footerRef} className="bg-lightOrange text-pureWhite p-8 flex flex-col gap-10 items-center lg:p-16 lg:pb-8 xl:gap-14">
 
            {/* Navigations */}
-           <section className="flex flex-col gap-8 items-center text-center md:flex-row md:items-start md:text-left md:w-full md:justify-between">
+           <section className="flex flex-col gap-8 items-center text-center md:flex-row md:items-start md:text-left md:w-full md:justify-between xl:max-w-[1180px]">
               <section>
                 
                 <h3 className="font-semibold mb-3 xs:text-lg md:text-sm md:mb-5 xl:text-lg xl:mb-7">ADDRESS</h3>
