@@ -1612,6 +1612,7 @@ input[type="radio"]:checked ~ .custom-radio::before {
     :root {
         --featurePicWidth: 19em;
         --featureOverlayWidth: 110%;
+        --heroSectionMaxWidth: 90em;
 
         /* Testimonials */
         --testimonialBoxWidth: 60%;
@@ -1641,7 +1642,7 @@ input[type="radio"]:checked ~ .custom-radio::before {
 
     .hero-section {
         width: 100%;
-        max-width: 90em;
+        max-width: var(--heroSectionMaxWidth);
         min-height: 80vh;
     }
 
@@ -1653,7 +1654,7 @@ input[type="radio"]:checked ~ .custom-radio::before {
     /* About us */
 
     .about-grid-container {
-        max-width: 75em;
+        max-width: 100%;
         width: 95%;
         grid-auto-columns: 1fr;
         grid-template-areas: 
@@ -1891,5 +1892,29 @@ input[type="radio"]:checked ~ .custom-radio::before {
     .hero-section .hero-description {
         max-width: 45em;
     }   
+
+}
+
+@media (min-width: 1650px) {
+    
+    :root {
+        --heroSectionMaxWidth: 1650px;
+    }
+
+    .hero-title {
+        font-size: 5em;
+    }
+
+    .hero-section .hero-description {
+        max-width: 100%;
+    }   
+
+    .message-modal h3 {
+    font-size: .9em;
+} 
+
+.about-grid-container {
+    width: 100%;
+}
 
 }

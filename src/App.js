@@ -110,7 +110,7 @@ function App() {
             <NavBar setFaqsVisible={setFaqsVisible} setSettingsPrivacy={setSettingsPrivacy} setAvailableAccs={setAvailableAccs} />
             <div className='px-7 flex flex-col gap-7 xl:px-14'>
           
-                 <main className='flex mb-16 flex-col gap-32 items-center lg:gap-40 xl:gap-52 xl:max-w-[1180px] xl:mx-auto'>
+                 <main className='flex mb-16 flex-col gap-32 items-center lg:gap-40 xl:gap-52 xl:max-w-[1180px] xl:mx-auto 3xl:max-w-[1650px]'>
                  <Element className='w-full' name="home">
                    <HeroSection />
                  </Element>

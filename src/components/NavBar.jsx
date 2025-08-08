@@ -242,11 +242,11 @@ const NavBar = ({setAvailableAccs, setSettingsPrivacy, setFaqsVisible}) => {
         
         <div ref={navBarRef} className={`${!isProductPage || navFixed ? "text-darkBrown" : "text-pureWhite"} ${isProductPage ? "relative bg-lightOverlay md:sticky md:top-0 xl:h-20" : "relative xl:h-24"} z-40 h-20 w-full`}>
         <div className={`w-full md:z-50  ${!isProductPage || navFixed ? "bg-pureWhite" : "bg-transparent"} ${(navFixed && !isProductPage) ? "fixed top-0 left-0 dark-shadow nav-bar nav-dark-shadow" : "relative"}`}>
-        <div className={`xl:max-w-[1180px] xl:mx-auto px-7 xl:px-14 flex w-full items-center justify-between z-20 ${navFixed || isProductPage ? "py-4" : "py-4 md:py-6 xl:py-7"}`} >
+        <div className={`xl:max-w-[1180px] xl:mx-auto px-7 xl:px-0 3xl:max-w-[1650px] flex w-full items-center justify-between z-20 ${navFixed || isProductPage ? "py-4" : "py-4 md:py-6 xl:py-7"}`} >
             <h3 onClick={() => {navigate('/');resetScroll() }} className={`cursor-pointer ${navFixed ? "text-xl" : "text-2xl"} title-font`}>Balai Mario</h3>
 
             <nav>
-            <ul className={`hidden nav-horizontal py-2 relative  md:flex xl:mr-64  ${navFixed ? "text-sm" : "text-sm xl:text-base"}`}>
+            <ul className={`hidden nav-horizontal py-2 relative  md:flex md:justify-center  ${navFixed ? "text-sm" : "text-sm xl:text-base"}`}>
                  
                  {
                     navigationBtns.map(({navName, navigate}, index) => {
