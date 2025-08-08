@@ -85,7 +85,7 @@ const ProductPreview = ({proNum, ImgSrc, title, price, message}) => {
 
 
             {/* Information */}
-            <div className='info-box absolute top-full text-center translate-y-full flex flex-col gap-3 px-5'>
+            <div className='info-box absolute top-full text-center translate-y-full flex flex-col gap-3 px-5 3xl:gap-6'>
               <p className='text-sm lg:text-base xl:leading-7'>{message}</p>
               <button onClick={handleNavigate} className='cursor-pointer border-pureWhite border p-2 px-6 rounded-lg self-center font-semibold'>Take a Look</button>    
             </div>

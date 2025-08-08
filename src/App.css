@@ -1899,6 +1899,8 @@ input[type="radio"]:checked ~ .custom-radio::before {
     
     :root {
         --heroSectionMaxWidth: 1650px;
+        --previewContainerWidth: 90em;
+        --previewContainerHeight: 35em;
     }
 
     .hero-title {
@@ -1915,6 +1917,14 @@ input[type="radio"]:checked ~ .custom-radio::before {
 
 .about-grid-container {
     width: 100%;
+}
+
+.preview-section {
+  max-width: 100%;
+}
+
+.preview-container > * .info-box {
+    max-width: 30em;
 }
 
 }
